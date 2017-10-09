@@ -1,0 +1,191 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="xtravis.css">
+    <title>Xtravis</title>
+    <script type="text/javascript">
+                if (window.location.protocol == "https:") {
+                    var restOfUrl = window.location.href.substr(6);
+                    window.location.replace("http:" + restOfUrl);
+                }
+            </script>
+</head>
+
+<body>
+<div id="graph" class="node">
+</div>
+<div role="navigation" class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <form role="search" class="navbar-form" id="search">
+                            <div class="form-group">
+                                <input type="text" value="Demand" placeholder="Search" class="form-control" name="search">
+                            </div>
+                            <button class="btn btn-default" type="submit">Search</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-header col-sm-6 col-md-6">
+                <div class="logo-well">
+                    <a href="http://www.xtravis.com">
+                        <img src="img/logo_see.png" alt="What would you like to see?" id="logo">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">Search Results</div>
+            <table id="results" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Capability</th>
+                    <th>Parent</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="title">Details</div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <img src="" class="well" id="poster"/>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <h4>Description</h4>
+                    <ul id="crew">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style type="text/css">
+.node {
+  cursor: pointer;
+}
+.node circle {
+  fill: #f00;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.node text {
+  font: 10px sans-serif;
+}
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+
+    .node { stroke: #222; stroke-width: 1.5px; }
+    .node.actor { fill: #888; }
+    .node.movie { fill: #BBB; }
+    .link { stroke: #999; stroke-opacity: .6; stroke-width: 1px; }
+</style>
+
+<script src = "/d3/d3.min.js"></script>
+<script src= "/jquery/jquery.min.js"></script>
+<script src="/neo4j-driver/lib/browser/neo4j-web.min.js"></script>
+
+<script>
+
+
+//var query= {"statements":[{"statement":"MATCH p=(n)-->(m)<--(k),(n)--(k) RETURN p Limit 100", "resultDataContents":["graph","row"]}]};
+  var query= {"statements":[{"statement":"MATCH (p),(c),o=(p)-[*0..3]->(c) WITH p as parent, collect(c) AS children,o RETURN parent, children,o","resultDataContents":["graph"]}]};
+
+//var query= {"statements":[{"statement":"MATCH (m),(n),o=(m)-[*0..2]->(n) return m,n,o", "resultDataContents":["graph"]}]};
+
+//the helper function provided by neo4j documents
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+// jQuery ajax call
+
+var nodes=[], links=[];
+
+var request = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+        // parsing the output of neo4j rest api
+            data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+                if (idIndex(nodes,n.id) == null){
+                    nodes.push({id:n.id,label:n.labels[0],title:n.properties.Capability});
+                }
+            });
+            links = links.concat( row.graph.relationships.map(function(r) {
+                // the neo4j documents has an error : replace start with source and end with target
+                return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),type:r.type};
+            }));
+        });
+        graph = {nodes:nodes, links:links};
+        drawGraph(graph);
+}
+
+});
+
+function drawGraph(graph){
+    var width=800, height = 800
+  // force layout setup
+    var force = d3.layout.force()
+        .charge(-200).linkDistance(80).size([width, height]);
+  // setup svg div
+    var svg = d3.select("#graph").append("svg")
+          .attr("width", "100%").attr("height", "100%")
+          .attr("pointer-events", "all");
+      force.nodes(graph.nodes).links(graph.links).start();
+      // render relationships as lines
+      var link = svg.selectAll(".link")
+              .data(graph.links).enter()
+              .append("line").attr("class", "link");
+      // render nodes as circles, css-class from label
+      var node = svg.selectAll(".node")
+              .data(graph.nodes).enter()
+              .append("circle")
+              .attr("class", function (d) { return "node "+d.label })
+              .attr("r", 15)
+              .call(force.drag);
+      // html title attribute for title node-attribute
+      node.append("title")
+              .text(function (d) { return d.title; })
+      // force feed algo ticks for coordinate computation
+      force.on("tick", function() {
+          link.attr("x1", function(d) { return d.source.x; })
+                  .attr("y1", function(d) { return d.source.y; })
+                  .attr("x2", function(d) { return d.target.x; })
+                  .attr("y2", function(d) { return d.target.y; });
+          node.attr("cx", function(d) { return d.x; })
+                  .attr("cy", function(d) { return d.y; });
+
+      });
+}
+
+</script>
+
+</body>
+
+</html>

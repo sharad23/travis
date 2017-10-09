@@ -1,0 +1,449 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/force.css">
+    <title>Xtravis</title>
+    <script type="text/javascript">
+                if (window.location.protocol == "https:") {
+                    var restOfUrl = window.location.href.substr(6);
+                    window.location.replace("http:" + restOfUrl);
+                }
+            </script>
+
+<style type="text/css">
+
+div.mydiv{
+    width:1200px;
+    height: 800px;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #eee;
+}
+div.mydiv2{
+
+width:1200px;
+    height: 200px;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #fff;
+}
+
+.node {
+  cursor: pointer;
+}
+
+.node.fixed {
+  fill: #f00;
+}
+
+.node rect {
+
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node circle {
+  /*//fill: #f00;*/
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.node text {
+  font-family:Lucida Console;
+  font-size: 10px;
+  font-style: bold;
+  font-weight: 900;
+  color: #003333;
+ }
+.link {
+  stroke-opacity: .6;
+  stroke: #999;
+  stroke-width: 1px;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+<div id="graph" class="mydiv" class="link"></div>
+<div role="navigation" class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <form role="search" class="navbar-form" id="search">
+                            <div class="form-group">
+                                <input type="text" id="searchField" value="" placeholder="Search" class="form-control">
+                            </div>
+                            <button id = "searchBtn" class="btn btn-default" type="button" >Search</button>
+                            <button id = "dminus" value="1" class="btn btn-default" type="button" >-</button>
+                            <button id = "dsubmit" class="btn btn-default" type="button" > </button>
+                            <button id = "dplus" value = "1" class="btn btn-default" type="button" >+</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar-header col-sm-6 col-md-6">
+                <div class="logo-well">
+                    <a href="http://www.xtravis.com">
+                        <img src="img/logo_see.png" alt="What would you like to see?" id="logo">
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="panel panel-default">
+            <div class="panel-heading">Search Results</div>
+            <table id="results" class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Capability</th>
+                    <th>Parent</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="panel panel-default">
+            <div class="panel-heading" id="title">Details</div>
+            <div class="row">
+                <div class="col-sm-4 col-md-4">
+                    <img src="" class="well" id="poster"/>
+                </div>
+                <div class="col-md-8 col-sm-8">
+                    <h4>Description</h4>
+                    <ul id="desc">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src = "lib/d3.min.js"></script>
+<script src= "lib/jquery.min.js"></script>
+<script src="lib/neo4j-web.min.js"></script>
+
+
+
+<script>
+        var neo = neo4j.v1;
+        var driver = neo.driver("bolt://localhost", neo.auth.basic("neo4j", "db"));
+        var session = driver.session();
+
+$(document).ready(function() {
+    var depth = 4;
+    var _search ="";
+    var query= {"statements":[{"statement":"match (m),(n),o=(m:Capability)-[:has]->(n:Capability) return m,n,o", "resultDataContents":["graph"]}]};
+    ajaxCall(query);
+
+    $("#searchBtn").click(function(){
+        _search = $("#searchField").val();
+        var query= {"statements":[{"statement":"match (m),(n),o=(m:Capability)-[:has*1..2]->(n:Capability) where m.Capability=~ '(?i).*" +_search + ".*'" +  "return m,n,o", "resultDataContents":["graph"]}]};
+        ajaxCall(query);
+      });
+
+       $("#dminus").click(function(){
+        if(depth >=2){
+        $("#dminus").prop('disabled', false);
+        depth = depth - parseInt($("#dminus").val());
+        $("#dsubmit").text(depth);
+            if(_search != "")
+            {
+              var query= {"statements":[{"statement":"match (m),(n),o=(m:Capability)-[*0.."+ depth +"]->(n:Capability) where m.Capability=~ '(?i).*" +_search + ".*'" +  "return m,n,o", "resultDataContents":["graph"]}]};
+            }
+            var query= {"statements":[{"statement":"match (m {Capability: 'TD Bank'}),(n),o=(m)-[*0.."+ depth +"]->(n) return m,n,o", "resultDataContents":["graph"]}]};
+            console.log(query);
+            ajaxCall(query);
+        }
+        else
+        {
+          $("#dsubmit").css('color','red');
+          $("#dminus").prop('disabled', true);
+        }
+      });
+
+      $("#dplus").click(function(){
+        if(depth<=4){
+            $("#dplus").prop('disabled', false);
+            depth = depth + parseInt($("#dminus").val());
+            $("#dsubmit").text(depth);
+            if(_search != "")
+            {
+              var query= {"statements":[{"statement":"match (m),(n),o=(m:Capability)-[*0.."+ depth +"]->(n:Capability) where m.Capability=~ '(?i).*" +_search + ".*'" +  "return m,n,o", "resultDataContents":["graph"]}]};
+            }
+            var query= {"statements":[{"statement":"match (m {Capability: 'TD Bank'}),(n),o=(m)-[*0.."+ depth +"]->(n) return m,n,o", "resultDataContents":["graph"]}]};
+            console.log(query);
+            ajaxCall(query);
+        }
+        else
+        {
+           $("#dplus").prop('disabled', true);
+         $("#dsubmit").css('color','red');
+        }
+
+      });
+
+});
+
+
+
+
+function row_click(e)
+{
+
+var descrip;
+var statement = "CYPHER runtime=compiled MATCH (m) where m.ID='" + e + "' with m as m RETURN m.Description as desc";
+    session.run(statement)
+    .then (function(result) {
+         var records = [];
+         for (i = 0; i < result.records.length; i++) {
+            records.push(result.records[i]);
+            }
+         return records;
+        })
+       .then(function(records){
+           for(i = 0; i < records.length; i ++)
+                {
+                    descrip=records[i].get("desc");
+                   $('#desc').empty();
+                   $('#desc').append('<tr><td>' + descrip + '</td></tr>');
+
+                }
+      });
+
+}
+
+
+
+
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+
+var color = d3.scale.category20();
+
+
+
+
+function ajaxCall(query)
+{
+var nodes=[], links=[];
+var request = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+        // parsing the output of neo4j rest api
+            data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+                if (idIndex(nodes,n.id) == null){
+                    nodes.push({id:n.id,label:n.labels[0],title:n.properties.Capability,ID:n.properties.ID, desc:n.properties.Description});
+                }
+            });
+            links = links.concat(row.graph.relationships.map(function(r) {
+                return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),type:r.type};
+            }));
+        });
+      graph = {nodes:nodes, links:links};
+      console.log(graph);
+      drawGraph(graph);
+}
+
+});
+}
+
+function drawGraph(json){
+    var xcolor = {};
+    var width =1800,
+    height = 1200
+
+    d3.selectAll("svg").remove();
+
+
+
+var svg = d3.select("#graph").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+
+var force = d3.layout.force()
+    .gravity(0.09)
+    .distance(100)
+    .charge(-300)
+    .size([width, height]);
+
+var drag = force.drag()
+    .on("dragstart", dragstart);
+
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+    .data(json.links)
+    .enter().append("line")
+    .attr("class", "link");
+
+
+  var node = svg.selectAll(".node")
+     .data(json.nodes)
+    .enter().append("g")
+    .style("fill", mycolor)
+      .attr("class", "node")
+      .call(force.drag)
+
+
+
+ node.append("circle")
+  .on("click", click)
+   .attr("x", -8)
+   .attr("y", -8)
+      .attr("r", 15)
+      //.attr("width", 80)
+      //.attr("height", 16)
+  .on("mouseover",function(d) {
+   var g=d3.select(this)
+      .transition()
+      .ease("elastic")
+      .duration(500)
+      .attr("r", 15*4)
+      // .attr("width", 180)
+      //.attr("height", 32)
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+
+
+
+     })
+
+     .on("mouseout", function(d) {
+     var g=d3.select(this)
+      .transition()
+      .ease("elastic")
+      .duration(500)
+      .attr("r",15)
+      // .attr("width", 80)
+      //.attr("height", 16)
+       .style("stroke", "none")
+      .style("stroke-width", 2)
+
+
+     });
+
+
+
+ node.append("text")
+      .text(function(d) { return (d.title).substring(0,10) + '...' })
+      .attr("dx", -6) //12
+      .attr("dy", ".15em")
+      .attr("fill","grey");
+
+
+  force.on("tick", function() {
+
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+
+ function flatten(root) {
+  var nodes = [], i = 0;
+
+  function recurse(node) {
+    if (node.children) node.children.forEach(recurse);
+    if (!node.id) node.id = ++i;
+    nodes.push(node);
+  }
+
+  recurse(root);
+  return nodes;
+}
+
+
+
+function mycolor(d) {
+  var colorKey;
+  var colorValue;
+  var ids = d.ID.split(".");
+
+  if(ids.length == 1){
+    if (xcolor.colorKey == ids[0]) {
+        xcolor.colorValue = color(d.ID);
+    }
+    else{
+        colorKey = ids[0];
+        colorValue = color(d.ID);
+        xcolor[colorKey] = colorValue;
+        //console.log(xcolor);
+    }
+  }
+  else
+  {
+    colorValue = xcolor[ids[0]];
+  }
+  return d.color = colorValue;
+ //return  d.color = color(d.ID.replace(/ .*/, ""));
+
+  //return d.color ? "#3182bd" : d.color ? "#c6dbef" : "#fd8d3c";
+}
+
+function dragstart(d) {
+  d3.select(this).classed("fixed", d.fixed = true);
+}
+
+function click(d)
+{
+    $('#results').empty();
+    $('#results').append("<tr id=" +d.ID+ " onclick=row_click('"+d.ID+ "')><td>" + d.ID + "</td><td>" + d.title + "</td></tr>");
+  //alert (d.title);
+}
+
+
+
+
+
+/*function click(d) {
+  if (!d3.event.defaultPrevented) {
+    if (d.children) {
+      d._children = d.children;
+      d.children = null;
+    } else {
+      d.children = d._children;
+      d._children = null;
+    }
+    update();
+  }
+}*/
+  }
+
+</script>
+
+</body>
+
+</html>

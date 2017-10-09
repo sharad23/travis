@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Untitled</title>
+<style>
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+
+  fill: #f00;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+div {
+    width:1200px;
+    height: 800px;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #eee;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<div id="graph" class="node"></div>
+
+<script src = "/d3/d3.min.js"></script>
+<script src= "/jquery/jquery.min.js"></script>
+<script src="/neo4j-driver/lib/browser/neo4j-web.min.js"></script>
+
+<script>
+
+
+//var query= {"statements":[{"statement":"MATCH p=(n)-->(m)<--(k),(n)--(k) RETURN p Limit 100", "resultDataContents":["graph","row"]}]};
+//var query= {"statements":[{"statement":"MATCH (m),(n),o=(m)-[*0..2]->(n) return m,n,o", "resultDataContents":["graph"]}]};
+ var query= {"statements":[{"statement":" MATCH (p), (c), o=(p)-[*1..3]-(c) WITH p as parent, collect(c) AS children,o RETURN parent, children,o","resultDataContents":["graph"]}]};
+
+//the helper function provided by neo4j documents
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+// jQuery ajax call
+
+var nodes=[], links=[];
+var request = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+                // parsing the output of neo4j rest api
+
+
+            data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+                if (idIndex(nodes,n.id) == null){
+                    nodes.push({id:n.id,label:n.labels[0],title:n.properties.Capability});
+                }
+            });
+            links = links.concat( row.graph.relationships.map(function(r) {
+                // the neo4j documents has an error : replace start with source and end with target
+                return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),type:r.type};
+            }));
+        });
+        graph = {nodes:nodes, links:links};
+        drawGraph(graph);
+}
+
+});
+
+function drawGraph(graph){
+   var width = 960,
+    height = 500,
+    root;
+
+var force = d3.layout.force()
+    .size([width, height])
+    .on("tick", tick);
+
+var svg = d3.select("#graph").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var link = svg.selectAll(".link"),
+    node = svg.selectAll(".node");
+
+d3.json("readme.json", function(error, json) {
+  if (error) throw error;
+
+  root = json;
+  update();
+});
+
+function update() {
+
+  var nodes = flatten(root),
+
+      links = d3.layout.tree().links(nodes);
+
+  // Restart the force layout.
+  force
+      .nodes(nodes)
+      .links(links)
+      .start();
+
+  // Update the links…
+  link = link.data(links, function(d) { return d.target.id; });
+
+  // Exit any old links.
+  link.exit().remove();
+
+  // Enter any new links.
+  link.enter().insert("line", ".node")
+      .attr("class", "link")
+      .attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  // Update the nodes…
+  node = node.data(nodes, function(d) { return d.id; }).style("fill", color);
+
+  // Exit any old nodes.
+  node.exit().remove();
+
+  // Enter any new nodes.
+  node.enter().append("circle")
+      .attr("class", "node")
+      .attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; })
+      .attr("r", function(d) { return Math.sqrt(d.size) / 10 || 4.5; })
+      .style("fill", color)
+      .on("click", click)
+      .call(force.drag);
+}
+
+function tick() {
+  link.attr("x1", function(d) { return d.source.x; })
+      .attr("y1", function(d) { return d.source.y; })
+      .attr("x2", function(d) { return d.target.x; })
+      .attr("y2", function(d) { return d.target.y; });
+
+  node.attr("cx", function(d) { return d.x; })
+      .attr("cy", function(d) { return d.y; });
+}
+
+// Color leaf nodes orange, and packages white or blue.
+function color(d) {
+  return d._children ? "#3182bd" : d.children ? "#c6dbef" : "#fd8d3c";
+}
+
+// Toggle children on click.
+function click(d) {
+  if (!d3.event.defaultPrevented) {
+    if (d.children) {
+      d._children = d.children;
+      d.children = null;
+    } else {
+      d.children = d._children;
+      d._children = null;
+    }
+    update();
+  }
+}
+
+// Returns a list of all nodes under the root.
+function flatten(root) {
+  var nodes = [], i = 0;
+
+  function recurse(node) {
+    if (node.children) node.children.forEach(recurse);
+    if (!node.id) node.id = ++i;
+    nodes.push(node);
+  }
+
+  recurse(root);
+  return nodes;
+}
+}
+
+</script>
+
+</body>
+
+</html>

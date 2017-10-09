@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Untitled</title>
+</head>
+
+<body>
+
+<script src = "/d3/d3.min.js"></script>
+<script src= "/jquery/jquery.min.js"></script>
+<script src="/neo4j-driver/lib/browser/neo4j-web.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+
+<script>
+        var neo = neo4j.v1;
+        var driver = neo.driver("bolt://localhost", neo.auth.basic("neo4j", "db"));
+        var session = driver.session();
+
+
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+
+//var query={"statements":[{"statement":"match p=(:Capability) -[:belongsto]-> (), (root:Capability {Capability: 'TD BANK'}) unwind nodes(p) as n unwind rels(p) as r return {root: id(root), nodes: collect(distinct n), links: collect(distinct {source: id(endNode(r)), target: id(startNode(r))})}","resultDataContents":["graph","row"]}]};
+
+var query= {"statements":[{"statement":"MATCH (m),(n),o=(m)-[*0..1]->(n) return m,n,o", "resultDataContents":["graph"]}]};
+var nodes=[], links=[];
+
+var root = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+            //console.log(data);
+        // parsing the output of neo4j rest api
+            data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+                if (idIndex(nodes,n.id) == null){
+                    nodes.push({id:n.id,label:n.labels[0],title:n.properties.Capability,ID:n.properties.ID, desc:n.properties.Description});
+                }
+            });
+
+            links = links.concat(row.graph.relationships.map(function(r) {
+               return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),type:r.type};
+            }));
+        });
+        treedata = {nodes:nodes, links:links};
+        update(treedata);
+}
+
+
+});
+
+var margin = {top: 20, right: 120, bottom: 20, left: 120},
+	width = 960 - margin.right - margin.left,
+	height = 500 - margin.top - margin.bottom;
+
+var i = 0;
+
+var tree = d3.layout.tree()
+	.size([height, width]);
+
+var diagonal = d3.svg.diagonal()
+	.projection(function(d) { return [d.y, d.x]; });
+
+var svg = d3.select("body").append("svg")
+	.attr("width", width + margin.right + margin.left)
+	.attr("height", height + margin.top + margin.bottom)
+  .append("g")
+	.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+function update(treeData){
+  root = treeData[0];
+  var tree = d3.layout.tree()
+	.size([height, width]);
+
+   nodes = tree.nodes(root).reverse(),
+   links = tree.links(nodes);
+
+  // Normalize for fixed-depth.
+  nodes.forEach(function(d) { d.y = d.depth * 180; });
+
+}
+
+
+</script>
+
+</body>
+
+</html>

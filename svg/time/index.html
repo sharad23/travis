@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type='text/javascript'>
+      var _sf_startpt=(new Date()).getTime()
+    </script>
+    <script src='http://use.typekit.com/vpm7xcw.js' type='text/javascript'></script>
+    <script>
+      // try{Typekit.load();}catch(e){}
+    </script>
+    <link href='stylesheet.css' media='screen' rel='stylesheet' type='text/css'>
+    <title>
+      Seeing Planning
+    </title>
+
+  </head>
+  <body>
+    <script src='../lib/d3.min.js' type='text/javascript'></script>
+    <script src='../lib/d3.layout.min.js' type='text/javascript'></script>
+    <script src='../lib/d3.time.js' type='text/javascript'></script>
+    <script src='Timeliner.js' type='text/javascript'></script>
+    <style>
+      body {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font: 10px;
+        margin: 0px;
+        letter-spacing: 0.078em;
+        background-color: #f5efe7;
+      }
+
+      .exchange {
+        fill: #555;
+      }
+
+
+      .connection {
+        stroke: #ee5564;
+      }
+
+      .connection.incoming {
+        stroke: #4aaff2;
+      }
+
+      .party text {
+        fill: #999;
+      }
+
+      #case_name
+        text-transform: uppercase;
+
+
+      .axis {
+        shape-rendering: crispEdges;
+      }
+
+
+      .x.axis line {
+        stroke: #666;
+      }
+
+      .x.axis path {
+        stroke: #666;
+      }
+
+      .x.axis .tick {
+        stroke: #666;
+      }
+
+      .x.axis .minor {
+        stroke-opacity: .5;
+      }
+
+      .x.axis path {
+        fill: none;
+      }
+
+      .x.axis text {
+        font-size: 11px;
+        font-weight: 800;
+        color: #666;
+      }
+
+      .y.axis line, .y.axis path {
+        stroke: #333;
+        fill: none;
+      }
+
+      text {
+        cursor: default;
+        pointer-events: none;
+      }
+
+      #waiting {
+        top: 200px;
+        left: 50%;
+        position: absolute;
+        opacity: 0.3;
+      }
+
+      #container {
+        width: 1200px;
+        margin: 0 auto;
+      }
+
+      #header {
+        position: fixed;
+        top: 0px;
+        background-color: rgba(255,255,255,0.8);
+        width: 100%;
+        box-shadow: 0px 3px 3px rgba(214,188,154,0.4);
+        padding: 7px 0px 5px 10px;
+      }
+
+      #chart {
+        clear: both;
+        margin: 70px
+      }
+
+      h1 {
+        font-weight: 900;
+        margin: 0px 0px 0px 0px;
+        padding:0;
+        font-size: 30px;
+        line-height: 27px;
+      }
+
+      h2 {
+        font-weight: 300;
+        padding:0 0 0 0;
+        margin:0;
+        text-transform: uppercase;
+        font-size: 14px
+      }
+    </style>
+    <div id='header'>
+      <div id='container'>
+        <h1 id='case_title'>
+         The Time Machine
+        </h1>
+        <h2 id='case_info'>
+          Point to a case or party to see its connections
+        </h2>
+      </div>
+    </div>
+    <div id='container'>
+      <div id='chart'>
+        <div id='waiting'>
+          <img src='spinner.gif'>
+        </div>
+      </div>
+    </div>
+    <script>
+      SVGElement.prototype.getTransformToElement = SVGElement.prototype.getTransformToElement || function(toElement) {
+        return toElement.getScreenCTM().inverse().multiply(this.getScreenCTM());
+      };
+
+      function init(data) {
+        document.getElementById("waiting").style.visibility = "hidden";
+        cases = data.cases;
+        parties = data.parties;
+        new Timeliner().plot(cases, parties);
+      };
+
+      d3.json("sampledata.json", init)
+    </script>
+  </body>
+
+</html>

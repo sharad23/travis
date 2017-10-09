@@ -1,0 +1,302 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>neo4jtree</title>
+    <script type="text/javascript">
+                if (window.location.protocol == "https:") {
+                    var restOfUrl = window.location.href.substr(6);
+                    window.location.replace("http:" + restOfUrl);
+                }
+            </script>
+
+<style type="text/css">
+
+div.mydiv{
+    width:1200px;
+    height: 800px;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #eee;
+}
+
+
+.node {
+  cursor: pointer;
+}
+
+.node.fixed {
+  fill: #f00;
+}
+
+.node rect {
+
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node circle {
+  /*//fill: #f00;*/
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+.node text {
+  font-family:Lucida Console;
+  font-size: 10px;
+  font-style: bold;
+  font-weight: 900;
+  color: #003333;
+ }
+.link {
+  stroke-opacity: .6;
+  stroke: #999;
+  stroke-width: 1px;
+}
+
+
+</style>
+
+</head>
+
+<body>
+    <div id="tree"></div>
+
+
+<script src = "/lib/d3.min.js"></script>
+<script src= "/lib/jquery.min.js"></script>
+<script src="/lib/neo4j-web.min.js"></script>
+<script src="mytree.js"></script>
+
+
+
+<script>
+        var neo = neo4j.v1;
+        var driver = neo.driver("bolt://localhost", neo.auth.basic("neo4j", "db"));
+        var session = driver.session();
+
+$(document).ready(function() {
+   var st = "MATCH p=() <-[]- () UNWIND nodes(p) AS n UNWIND rels(p) AS r WITH n, r ORDER BY n.Name RETURN {nodes: COLLECT(DISTINCT n), links: COLLECT(DISTINCT {source: id(endNode(r)), target:id(startNode(r))})}";
+    var query= {"statements":[{"statement":st, "resultDataContents":["graph", "row"]}]};
+    ajaxCall(query);
+});
+
+
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+// jQuery ajax call
+var color = d3.scale.category20();
+
+
+function ajaxCall(query)
+{
+var nodes=[], links=[];
+var request = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+        // parsing the output of neo4j rest api
+            data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+                if (idIndex(nodes,n.id) == null){
+                    nodes.push({id:n.id,label:n.labels[0],name:n.properties.Capability,ID:n.properties.ID, desc:n.properties.Description});
+                }
+            });
+            //console.log(row.row[0]);
+
+            //links = links.concat(row.graph.relationships.map(function(r) {
+            links = links.concat(row.row[0].links.map(function(r) {
+                 //console.log (r);
+                // the neo4j documents has an error : replace start with source and end with target
+                return {source:r.source,target:r.target,type:r.type};
+            }));
+        });
+      graph = {nodes:nodes, links:links};
+      //console.log(graph);
+     //drawGraph(graph);
+     treeJson(graph);
+}
+
+});
+}
+
+function drawGraph(json){
+    var xcolor = {};
+    var width =1200,
+    height = 800
+
+    d3.selectAll("svg").remove();
+
+var svg = d3.select("#tree-container").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var tree = d3.layout.tree()
+
+var force = d3.layout.force()
+    .gravity(0.09)
+    .distance(100)
+    .charge(-300)
+
+    .size([width, height]);
+
+var drag = force.drag()
+    .on("dragstart", dragstart);
+
+  force
+      .nodes(json.nodes)
+      .links(json.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+    .data(json.links)
+    .enter().append("line")
+    .attr("class", "link");
+
+
+  var node = svg.selectAll(".node")
+     .data(json.nodes)
+    .enter().append("g")
+    .style("fill", mycolor)
+      .attr("class", "node")
+      .call(force.drag)
+
+
+
+ node.append("circle")
+  .on("click", click)
+   .attr("x", -8)
+   .attr("y", -8)
+      .attr("r", 15)
+      //.attr("width", 80)
+      //.attr("height", 16)
+  .on("mouseover",function(d) {
+   var g=d3.select(this)
+      .transition()
+      .ease("elastic")
+      .duration(500)
+      .attr("r", 15*4)
+      // .attr("width", 180)
+      //.attr("height", 32)
+      .style("stroke", "black")
+      .style("stroke-width", 2)
+
+
+
+     })
+
+     .on("mouseout", function(d) {
+     var g=d3.select(this)
+      .transition()
+      .ease("elastic")
+      .duration(500)
+      .attr("r",15)
+      // .attr("width", 80)
+      //.attr("height", 16)
+       .style("stroke", "none")
+      .style("stroke-width", 2)
+
+
+     });
+
+
+
+ node.append("text")
+      .text(function(d) { return (d.name).substring(0,10) + '...' })
+      .attr("dx", -6) //12
+      .attr("dy", ".15em")
+      .attr("fill","grey");
+
+
+  force.on("tick", function() {
+
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+
+ function flatten(root) {
+  var nodes = [], i = 0;
+
+  function recurse(node) {
+    if (node.children) node.children.forEach(recurse);
+    if (!node.id) node.id = ++i;
+    nodes.push(node);
+  }
+
+  recurse(root);
+  return nodes;
+}
+
+
+
+function mycolor(d) {
+  var colorKey;
+  var colorValue;
+  var ids = d.ID.split(".");
+
+  if(ids.length == 1){
+    if (xcolor.colorKey == ids[0]) {
+        xcolor.colorValue = color(d.ID);
+    }
+    else{
+        colorKey = ids[0];
+        colorValue = color(d.ID);
+        xcolor[colorKey] = colorValue;
+        //console.log(xcolor);
+    }
+  }
+  else
+  {
+    colorValue = xcolor[ids[0]];
+  }
+  return d.color = colorValue;
+ //return  d.color = color(d.ID.replace(/ .*/, ""));
+
+  //return d.color ? "#3182bd" : d.color ? "#c6dbef" : "#fd8d3c";
+}
+
+function dragstart(d) {
+  d3.select(this).classed("fixed", d.fixed = true);
+}
+
+function click(d)
+{
+    $('#results').empty();
+    $('#results').append("<tr id=" +d.ID+ " onclick=row_click('"+d.ID+ "')><td>" + d.ID + "</td><td>" + d.name + "</td></tr>");
+  alert (d.name);
+}
+
+
+
+
+
+/*function click(d) {
+  if (!d3.event.defaultPrevented) {
+    if (d.children) {
+      d._children = d.children;
+      d.children = null;
+    } else {
+      d.children = d._children;
+      d._children = null;
+    }
+    update();
+  }
+}*/
+  }
+
+</script>
+</body>
+
+</html>

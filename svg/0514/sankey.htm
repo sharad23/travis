@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+<head>
+<title>SANKEY Experiment</title>
+<style>
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: xx-small;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<p id="chart"></p>
+
+<script src= "/jquery/jquery.min.js"></script>
+<script src = "/d3/d3.min.js"></script>
+<script src = "/d3/sankey.js"></script>
+
+<script src="/neo4j-driver/lib/browser/neo4j-web.min.js"></script>
+
+
+
+
+<script>
+
+var newlinks;
+var query= {"statements":[{"statement":"match (m),(n),o=(m:Capability)-[:has]->(n:Capability) where m.Level ='0' or m.Level ='1'or m.Level = '3' return m,n,o", "resultDataContents":["graph"]}]};
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+// jQuery ajax call
+var color = d3.scale.category20();
+
+var nodes= [], links=[];
+var jsonNodes;
+var request = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+
+        // parsing the output of neo4j rest api
+            data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+                //console.log(n);
+                //if (idIndex(nodes,n.id) == null){
+                    nodes.push({id:parseInt(n.id),label:n.labels[0],name:n.properties.Capability,ID:n.properties.ID, desc:n.properties.Description});
+                //}
+            });
+            jsonNodes = JSON.stringify(nodes);
+            links = links.concat( row.graph.relationships.map(function(r) {
+                // the neo4j documents has an error : replace start with source and end with target
+                //console.log(r);
+                //return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode), value:Math.floor(Math.random() * (20 + 1)) + 5};
+                return {source:r.startNode,target:r.endNode, value:Math.floor(Math.random() * (20 + 1)) + 5};
+            }));
+        });
+        var jsonLinks = JSON.stringify(links);
+        graph = {nodes:nodes, links:links};
+
+
+        var newlinks = "{" + "\"" + "links" + "\"" + ":" + jsonLinks + "," + "\"" + "nodes" + "\"" + ":" + jsonNodes + "}";
+
+        //console.log (newlinks);
+
+
+        //console.log(jsonNodes);
+        //drawGraph(graph);
+}
+
+});
+
+
+var units = "Capabilities";
+
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
+    width = 1200 - margin.left - margin.right,
+    height = 740 - margin.top - margin.bottom;
+
+var formatNumber = d3.format(",.0f"),    // zero decimal places
+    format = function(d) { return formatNumber(d) + " " + units; },
+    color = d3.scale.category20();
+
+// append the svg canvas to the page
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")");
+
+// Set the sankey diagram properties
+var sankey = d3.sankey()
+    .nodeWidth(36)
+    .nodePadding(10)
+    .size([width, height]);
+
+var path = sankey.link();
+
+// load the data
+d3.json("capafull.json", function(error, graph) {
+
+    var nodeMap = {};
+    graph.nodes.forEach(function(x) { nodeMap[x.id] = x; });
+    //console.log(nodeMap);
+    graph.links = graph.links.map(function(x) {
+      return {
+        source: nodeMap[x.source],
+        target: nodeMap[x.target],
+        value: x.value
+      };
+    });
+  //console.log(nodeMap);
+   // console.log(nodeMap);
+  sankey
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .layout(32);
+
+// add in the links
+  var link = svg.append("g").selectAll(".link")
+      .data(graph.links)
+    .enter().append("path")
+      .attr("class", "link")
+      .attr("d", path)
+      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+      .sort(function(a, b) { return b.dy - a.dy; });
+
+// add the link titles
+  link.append("title")
+        .text(function(d) {
+         // console.log(d);
+      	return d.source.ID + " → " +
+                d.target.ID + "\n" + format(d.value); });
+
+// add in the nodes
+  var node = svg.append("g").selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) {
+		  return "translate(" + d.x + "," + d.y + ")"; })
+    .call(d3.behavior.drag()
+      .origin(function(d) { return d; })
+      .on("dragstart", function() {
+		  this.parentNode.appendChild(this); })
+      .on("drag", dragmove));
+
+// add the rectangles for the nodes
+  node.append("rect")
+      .attr("height", function(d) { return d.dy; })
+      .attr("width", sankey.nodeWidth())
+      .style("fill", function(d) {
+		  return d.color = color(d.name.replace(/ .*/, "")); })
+      .style("stroke", function(d) {
+		  return d3.rgb(d.color).darker(2); })
+    .append("title")
+      .text(function(d) {
+		  return d.name + "\n" + format(d.value); });
+
+// add in the title for the nodes
+  node.append("text")
+      .attr("x", -6)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x < width / 2; })
+      .attr("x", 6 + sankey.nodeWidth())
+      .attr("text-anchor", "start");
+
+// the function for moving the nodes
+  function dragmove(d) {
+    d3.select(this).attr("transform",
+        "translate(" + (
+        	   d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+        	) + "," + (
+                   d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+            ) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+  }
+});
+
+</script>
+
+</script>
+
+</body>
+</html>

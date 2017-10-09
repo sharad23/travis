@@ -1,0 +1,43 @@
+{
+  "columns": [
+    "n"
+  ],
+  "data": [
+    {
+      "row": [
+        {
+          "Description": "None",
+          "Capability": "Demand Generation",
+          "Parent": "None",
+          "Level": "1",
+          "ID": "D"
+        }
+      ],
+      "meta": [
+        {
+          "id": 0,
+          "type": "node",
+          "deleted": false
+        }
+      ],
+      "graph": {
+        "nodes": [
+          {
+            "id": "0",
+            "labels": [
+              "Capability"
+            ],
+            "properties": {
+              "Description": "None",
+              "Capability": "Demand \n Generation",
+              "Parent": "None",
+              "Level": "1",
+              "ID": "D"
+            }
+          }
+        ],
+        "relationships": []
+      }
+    }
+  ]
+}

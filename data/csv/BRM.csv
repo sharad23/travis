@@ -1,0 +1,377 @@
+ID,Name,Description,Parent,Level
+TD,TD Bank,America's Most Convinient Bank,0,0
+D,Demand Generation,,TD,1
+D.01,Product / Service Management & Pricing,,D,2
+D.01.01,Product & Service Conceptualization,The capability of the bank to conceptualize a product / service or a product bundle that can be offered to the bank?s clients. Product conceptualization is driven by the needs of the client. The product is conceptualized based on market intelligence or can be driven through the internal innovation in the bank. The capability includes assessing the feasibility of developing and delivering the product to the clients and forecasting the product?s performance. The capability enables the bank to decide on whether or not the product needs to be developed and offered to the clients.,D.01,3
+D.01.02,Product & Service Development,The capability of the bank to define the specifications of a product or service in terms of features and pricing and bundling of multiple products. It also includes ability of the bank to roll out the products its clients.,D.01,3
+D.01.03,Product & Service Lifecycle Management,"This is the capability of the bank to manage lifecycle of the products and services from development to retirement. It also includes change and update product attributes based on changing market conditions and client demand. Product maintenance could include changing attributes such as: executing rate changes, product feature changes, and updating product benchmarking data. Product Catalog / Master Management",D.01,3
+D.01.04,Rates Assessment & Management,Manage activities associated with assessing/calculating rates and with processing rates.,D.01,3
+D.01.05,Product & Service Performance Assessment,The capability of the bank to assess the performance of the product or service against internal targets and external benchmarks.  Drawing on the Bank's own analytic capabilities (cf. Manage Analytics & Reporting) the reason of any deviation is determined and corrective action is taken. Assessment of the product performance also helps in deciding whether to continue or retire the product.,D.01,3
+D.01.06,Product & Service Pricing,The capability of the bank to define the pricing and pricing guidelines for the sales team. Pricing takes into consideration the internal cost for delivery of the product or service and the market pricing as determined through the market intelligence.,D.01,3
+D.01.07,Deal Pricing Management,This capability includes the ability to price structured deals for commercial / syndicated loans.,D.01,3
+D.01.08,Group Pricing Management,The capability of the bank to provide a preferential price for selected partners / vendors / employees and other institutions.,D.01,3
+D.01.09,Channel Pricing Management,This capability of the bank to provide differentiated pricing based on method of access.  This capability assists the bank by influencing client behavior by incentivizing the use of certain channels based on the bank's overall strategy.,D.01,3
+D.01.10,Pricing Strategy Definition,The capability to define the pricing guidelines for products and services based on market and competitor analysis. This capability enables the Bank to competitively position its products & services in the market.,D.01,3
+D.02,Marketing,,D,2
+D.02.01,Understand Markets & Clients,"This is the bank?s ability to understand the market in which it operates. Market includes various entities such as general population, businesses, competitors, distributors, institutions, government etc. in a given area. The bank needs to understand the individual needs of these entities in the market, their interactions and interrelations. The bank also needs to gain a high level understanding of the environment and economy of the market.",D.02,3
+D.02.02,Market Segmentation,"Manage market segmentation clusters based on various perspectives such as market type, product type or client demographics",D.02,3
+D.02.03,Marketing Strategy Development,"The capability of the bank to define an approach to engage with the market entities such as clients and general public. This capability includes building the awareness of the bank?s products or services, promoting the bank?s brand and communicating the values and relevance of the bank to the market place.",D.02,3
+D.02.04,Campaign Management,Manage and execute client marketing campaigns,D.02,3
+D.02.05,Lead Management,Manage the process to generate and capture leads for new client acquisitions and cross-sell opportunities,D.02,3
+D.02.06,Loyalty,"Capability of the bank to develop client loyalty and to measure commitment based on obligation or, in consumer preferences, degree of satisfaction.",D.02,3
+D.02.06.01,Client Loyalty Points Management,Manage client centric loyalty /rewards programs,D.02.06,4
+D.02.06.02,Product Points (Loyalty / Rewards) Management,Manage product centric loyalty /rewards programs,D.02.06,4
+D.02.07,Product / Service Bundling,Provide centralized and template based management of  information about products and services,D.02,3
+D.02.08,Marketing Activities Planning & Execution,"The capability of the bank to execute marketing strategy and plan in the marketplace. Marketing Execution involves placing all the marketing collaterals in the marketplace and evaluating the effectiveness of marketing in meeting the forecasted sales of the company?s products and services. It also includes defining of actions necessary to execute a marketing strategy. Marketing Planning includes establishing marketing budgets, sales forecasts, performance targets, metrics etc.",D.02,3
+D.02.09,Marketing Collateral Management,Managing a collection of marketing communications pieces used as part of an organization's overall marketing strategy.,D.02,3
+D.02.10,Vehicle Remarketing,This is capability of the bank to manage disposal of vehicles that have reached the end of their fixed lease term.,D.02,3
+D.03,Brand Management,,D,2
+D.03.01,Brand Valuation,This capability involves understanding and assessing the value of brand that impacts the perceptions of stakeholders including clients and shareholders about the brand. The brand valuation sub-capabilities includes research based brand valuation like measuring consumer  behavior and attitudes and market share to assess the performance of the brand. This could use qualitative and quantitative approaches like measuring market value and ability of the brand to produce after-tax income. ,D.03,3
+D.03.02,Target Brand Positioning,"This capability involves defining the brand in terms of target client, value proposition, competitor differentiation, client experience at touch point and meaning of brand to different audiences including employees. It includes how the brand and the operating practice fit together to create a single image of the company and a consistent client experience across all contact and touch points. ",D.03,3
+D.03.03,Brand Positioning Enhancement,"This capability involves the analysis of brand strength, and actions taken to reinforce the brand image with clients. ",D.03,3
+D.03.04,Brand Customer Experience,"This capability includes the management of actions involved in ensuring an integrated approach to interactions with clients, third parties, and other stakeholders.  This is done from an overall enterprise level, down to each individual client experience.",D.03,3
+D.03.05,White Labeling / 3rd Party branding,Provide rebranded products and services to client via 3rd party/partner channels,D.03,3
+D.04,Sales Planning & Management,,D,2
+D.04.01,Sales Territories Management,Manage the process to assign sales territories,D.04,3
+D.04.02,Sales Opportunity Management,Manage the sales opportunity pipeline process from lead quantification to actual sale,D.04,3
+D.04.03,Sales Strategy & Plan Development,"Manage the process to generate sales plan and strategy, including how distribution channels will be used for various products.",D.04,3
+D.04.04,Sales Performance & Compensation,"The capability of the bank to perform Sales Activity Management, Sales Compensation Management, Sales Performance Tracking and Measuring.",D.04,3
+C,Client Acquisition & Management,,TD,1
+C.01,Client Offering & Pricing,,C,2
+C.01.01,Aggregation / Bundling Offering,Provide capability to aggregate product and services into bundles based on client needs and profile,C.01,3
+C.01.02,Offering & Content Personalization,Provide ability to contextualize and personalize products and services based on customer needs and delivery channel,C.01,3
+C.01.03,Client Pricing,"The capability of the bank to support the sales team in determining the pricing of product or service to the client. Pricing is specific to a client based on his / her relationship and the associated risk. The pricing for a specific client deal is based on the overall product pricing guidelines and risk based pricing. It also includes the capability of negotiating a mutually agreeable price with the client. Example: In case of a credit product of the bank, output of underwriting capability will serve as an input for pricing of a particular client credit request.",C.01,3
+C.01.04,Sales Contract Execution,"The capability of the bank to support the activities that are required for the client to enter into an agreement with the bank for a specific product or service. The contract specifies the details of product structure, terms and conditions and pricing. The contract determines the entities and responsibilities that are involved in servicing the client. Documentation and required verifications are completed before the commencement of the service to the client.",C.01,3
+C.01.05,Application Management,"This capability to collect, document, store and analyse the information gathered as part of a client's application for a product or service.",C.01,3
+C.01.06,Quote Generation,"The capability of the bank to generate a formal statement of promise (submitted usually in response to a request for quotation) by potential supplier to supply the product goods or services requested by a client, at specified prices, and within a specified period. A quotation may also contain terms of sale and payment, and warranties. Acceptance of quotation may constitute an agreement binding on both parties.",C.01,3
+C.02,Client Profile Management,,C,2
+C.02.01,Customer Profiling ,The capability of the bank to develop various categorizations for a customer that can be used for various purposes.  Placing a customer in a given categorization is based on information managed by other capabilities and either stored internally or obtain from outside TD.,C.02,3
+C.02.01.01,Client Financial Health Assessment,"The capability of the bank to assess the current financial health of the client and to meet the financial goals, to provide a clear understanding of the current financial position, current investment patterns and financial liabilities required as a baseline for health assessment.",C.02.01,4
+C.02.01.02,Client Risk Appetite,"The capability of the bank to understand the tolerance to risk and loss of capital and create an appropriate risk profile for the client. The bank also recommends the appropriate level of risk exposure, considering the financial position and financial objectives of the client.",C.02.01,4
+C.02.01.03,Client Information Analysis,Drawing on the Bank's own analytic capabilities to understand the nature of the individual customer and potential customer for the purpose of identifying actions to be taken.,C.02.01,4
+C.02.01.04,Client Credit Review,The capability of the bank to periodically monitor the credit facilities granted to a client.,C.02.01,4
+C.02.02,Client Needs Assessment,"This capability enables the bank to have an understanding of the client?s financial needs. The needs are assessed based on the client demographics and profile rather than a formal detailed needs analysis (which is part of Financial Planning for a client). The primary objective of the needs assessment is to position the products of the bank. In case of wealth management of the client, this capability enables the bank to analyze and understand the unique financial needs of the client and their priorities. The need analysis is done to understand and determine the income and cash-flow needs, return expectations, tax implications, time horizon and purpose of investing.",C.02,3
+C.02.03,Client Decisioning,The ability of the organization to make decisions based on internal and external client information,C.02,3
+C.02.03.01,Adjudication,"The capability of a bank to analyze the  application/request received from the client, assess the risks, make a decision ",C.02.03,4
+C.02.03.02,Underwriting,Capability of assessing the eligibility of a client to receive products with respect to the appraised 'right' price the client can afford and the exposure to loss the company can incur.,C.02.03,4
+C.03,Client Case Management,,C,2
+C.03.01,Notes Management,Provide ability to capture and reuse notes as part of client case resolution,C.03,3
+C.03.02,Escalation Management,Manage the process/rules to escalate client cases ,C.03,3
+C.03.03,Inquiry Management,Manage client inquiries as a part of services support and client relationship management.,C.03,3
+C.03.04,Dispute Management,Manage the process of notifying the client on trouble ticket/case updates/statuses,C.03,3
+C.04,Client Information & Relationship Management,,C,2
+C.04.01,Client Consolidated View,"Develop and integrated view across products, channels and lines of business",C.04,3
+C.04.02,Client Information Management,"The capability of the bank to perform Client Reference Management, Client Information Administration and Client Account Aggregation and billing profile.",C.04,3
+C.04.02.01,Client / Account Relationship Management,The ability to establish and maintain the relationships between a customer and the accounts they hold,C.04.02,4
+C.04.02.02,Client Authentication,The ability to manage credentials for a customer and verify them against those offered at any given interation point in order to verify identity,C.04.02,4
+C.04.02.03,Client Authorization,The ability to manage and verify the set of access and action priviledges for a customer.,C.04.02,4
+C.04.03,Client Relationship Management,"The capability of the bank to manage client engagement and relationships. This capability supports the activities of the bank to build a banking relationship with the clients as against having a transactional view of clients. It involves ongoing interaction and communication with the clients, understanding needs and rewarding loyalty.",C.04,3
+C.04.04,Statement & Correspondence,This is  a capability to produce and deliver statements and correspondence in printed and/or electronic format,C.04,3
+F,Fulfillment,,TD,1
+F.01,Agreement & Account Management,,F,2
+F.01.01,Agreement Management,"Capability of making a formal agreement between the bank, client stipulating the terms under which they are authorized to act.",F.01,3
+F.01.02,Account Management,"The capability of the bank to perform operations on an account, policy, etc. including set of activities required to open, change or close the account. The account can be either a client account or internal bank account.",F.01,3
+F.01.02.01,Account Opening,Capability to open and activate client account for servicing and transactions.,F.01.02,4
+F.01.02.02,Account Servicing,Provide accurate administrative and timely support services to operate and support client account.,F.01.02,4
+F.01.02.03,Account Monitoring,Monitor client account and associated transactions,F.01.02,4
+F.01.02.04,Account Closing,Capability enabling deactivation of client account.,F.01.02,4
+F.01.03,Account Reconciliation,Capability of the bank to reconcile the transactions in an account and corresponding entries in internal accounts. Bank also processes queries raised  on reconciliation differences in the account.,F.01,3
+F.01.04,Standing Instructions,This is the capability of the bank to store and execute standing instructions for activity against an agreement.  The standing instructions could originate from any line of business.,F.01,3
+F.01.05,Account Access Media Management,"The capability of the bank to manage the lifecycle of an access media, for example creation, issuance, encryption, and destruction.  Some examples of access media include: cards (Credit, Debit, Gift, Reward), chip (NFC) and cheque books.",F.01,3
+F.01.06,Safekeeping Management,"The capability of the bank to hold assets, both traded and non-traded, in trust on an agency basis as well as for itself.",F.01,3
+F.02,Global Trade,,F,2
+F.02.01,Payment Undertaking,Payment processing is the processing of payment instructions and actual moving of funds between accounts (internal or external) for the purposes of facilitating the sale and purchase of goods and services across international borders.,F.02,3
+F.02.02,Bill Negotiation,"Capability of the bank to provide document handling / negotiation services to its client for their import / export transactions. In the case of exports, client submits the shipping documents and invoice to the bank. In the case of imports, client receives the shipping documents and invoice from the bank. The bank ensures that the trade documents are in conformity with terms and conditions of the trade order and with letter of credit underlying the trade.",F.02,3
+F.02.03,Commitments Under Documentary Credit,Capability of the bank to monitor its payment and collection commitments under Letters of Credit (LCs) issued on behalf of its clients or received and advised to its clients. The bank initiates the payment for retirement of bill or follows up for collections.,F.02,3
+F.02.04,Financial Guarantees,"This is the capability of the bank to provide a financial guarantee, on behalf of its clients, for fulfillment of obligations by the client under the terms of a trade contract. If the client fails to fulfill the performance obligation under the contract, the counterparty raises a claim on the bank and the bank compensates the counterparty to the extent of financial value of guarantee.",F.02,3
+F.02.05,Correspondent Banking,"This is the capability of the bank to provide Canadian $ account services to the foreign banks that do not have presence in Canada. The services include managing Canadian $ payments, receipts and Canadian $ clearing services. Similarly, in the overseas countries where bank does not have a presence, it enters into correspondent banking relationship with the overseas banks for foreign currency account and for clearing services.",F.02,3
+F.02.06,Interbank Trade Loans,"Capability of the Bank to provide trade loans to other banks. The Bank reviews drawdown requests and documentation, obtains funding, executes payments, advises borrowers. The Bank follows up on rollover and payments.",F.02,3
+F.03,Capital Market,,F,2
+F.03.01,Financial Instruments Management,"This is the capability to perform reference data management, management of the Securities and Wealth financial instruments. ",F.03,3
+F.03.02,Capital Raising,Manage the process to facilitate deals to raise capital ,F.03,3
+F.03.02.01,Order Syndication,"Manage the process of syndication (accounting, expenses, disbursements, notifications) across syndicate members to acquire or sell large pool of securities.",F.03.02,4
+F.03.03,Access to Exchange Market,Provide access directly to external / 3rd party trading markets,F.03,3
+F.03.04,Corporate Action Management,"This is the capability of the bank to process corporate action announcements received from various sources such as issuers, exchanges, Information providers and bank?s internal business units. The capability includes validating, capturing and notifying the clients about the key attributes of the corporate actions such as Ex-date, Record date, Payment date, deadline for elections, entitlement details etc., for various corporate action events across the asset classes .",F.03,3
+F.03.04.01,Corporate Action Announcements Monitoring,"This is the capability of the bank to process corporate action announcements received from various sources and Information providers such as issuers, exchanges, and bank?s internal business units. The capability includes capturing and validating action announcements, and notifying appropriate stakeholders.",F.03.04,4
+F.03.04.02,Corporate Action Entitlements Management,"This is the capability of the bank to provide the corporate actions entitlement computation for different types of distribution and mandatory exchange events, process customer elections and manage the claims of the customers.",F.03.04,4
+F.04,Valuation & Collateral Management,,F,2
+F.04.01,Collateral Administration,"This is the capability of the bank to account for collateral in its books and ensure that the collateral is maintained properly. Bank needs to create the necessary legal charge on the collateral, ensure that requirements relating to insurance cover and payment of taxes are taken care of etc. The bank also needs to handle collateral related client request such as, release of collateral, substitution of collateral etc.  Where appropriate, one form of collateral may be substituted with another",F.04,3
+F.04.02,Collateral Monitoring,"This is the capability of the bank to ensure that the fluctuations in the value of collateral do not impair the security available to cover the exposure. Based on the periodic review, if the value of collateral has gone below the terms and conditions stipulated for the exposure, the bank decides to call for additional collateral.",F.04,3
+F.04.03,Businesses Valuation,"Business Valuation is the capability of the bank to provide client with formal valuations and opinion reports. The capability includes: 
+   - Detailed analysis of a balance-sheet, other financial statements, firm?s cash-flows, financial resources, risk exposures, and other available information in order to do an accurate valuation of the target company. 
+   - Use of common business valuation approaches such as Asset-based, Earning value, Market value, etc. 
+   - Valuation of the company including its non-tangible assets such as goodwill, R&D, brand power, etc.",F.04,3
+F.04.04,Securities Valuation,"Securities Valuation is the capability of the bank to perform pricing and valuation of securities contracts, securities positions, open positions or exposures, collaterals, mutual fund assets etc. There are different valuation methods used for different underlying purposes. It includes valuation methods such as Mark-to Market, Net Asset Value, Net Present Value, etc.",F.04,3
+F.04.05,Physical Assets Valuation,"Capability for valuation of various types of physical assets such as, property, inventory and stock, machinery etc. The valuation methods can be of multiple types such as, cost based, market price based etc. Valuation considers both; the asset attributes and external attributes. Asset attributes include condition and age of asset. External attributes include surrounding neighborhood in case of homes, market demand for asset and general economic conditions.",F.04,3
+F.04.06,Insurable Assets Valuation,Appraisal estimation of the value of an insurable item,F.04,3
+F.04.07,Asset Disposal,This is the capability of the bank for disposal of assets seized as collateral (for example: vehicle disposal after accident in insurance policy or at end of the lease),F.04,3
+F.05,Financial Portfolio Management,,F,2
+F.05.01,Portfolio Monitoring & Administration,Provide integrated administration and monitoring of investment portfolio,F.05,3
+F.05.02,Portfolio Modeling,"This is the capability of the bank to define and maintain models (investment models, financial planning, lending). Portfolio Models provide templates that aid in the creation of the optimum mix of products both from client and bank?s perspective",F.05,3
+F.05.03,Portfolio Evaluation,This is the capability of the bank to track the performance of the portfolio against the stated objective. The performance of the portfolio is also evaluated against a benchmark.,F.05,3
+F.05.04,Portfolio Optimization,Provide tools and services to optimize performance of the investment portfolio,F.05,3
+F.06,Trade Research,,F,2
+F.06.01,Trade Recommendations Generation,"Provide research and advisory services including recommendations to buy, hold or sell",F.06,3
+F.06.02,Quantitative Models Development,"It is the capability of the bank to provide client with quantitative models to analyze historical trends and forecast projected returns for different categories of asset classes. The capability includes: 
+   - Having charts / detailed reports to view returns information on specific instrument / asset class for any fractile or time-period. 
+   - Having trade models to simulate trades recommendations before they are executed.
+This capability may draw on the Bank's analytic capabilities (cf. Manage Analytics & Reporting) to assist.",F.06,3
+F.06.03,Fundamental Research,"It is the capability of the bank to carry out in-depth financial and economic analysis of target instrument / asset class / sector / market, based on fundamentals and external environment. It includes producing sector or market specific reports that help the firm?s trading desk to devise trading strategies and recommendations by publishing reports in leading industry journals / forums and providing macro-economic outlook to regional sales and trading. This capability may draw on the Bank's analytic capabilities (cf. Manage Analytics & Reporting) to assist.",F.06,3
+F.06.04,Macro-Economic Outlook Development,"It is the capability of the bank to analyze the macro economic outlook and provide recommendations for investment strategies. It includes: 
+   - Detailed study of economic and geo-political environment prevailing in the target market. 
+   - Analyze the correlation between economic environment of target market and other important markets and draw inferences. 
+   - Study the regulatory norms and its corresponding impact on the market. 
+   - Forecast the generic trend of investment in the market by various entities (Government, FIs, Retail, etc.). 
+   - Recommend the investment strategies for regional sales/trading based on overall investment outlook of the region.
+This capability may draw on the Bank's analytic capabilities (cf. Manage Analytics & Reporting) to assist.",F.06,3
+F.07,Collection & Recovery,,F,2
+F.07.01,Delinquency & Default Management,"This is the capability of the bank to manage defaults on the given loans. When an account becomes delinquent, the bank needs to take a decision on whether to continue or recall the loan and initiate suitable rehabilitation measures or legal proceedings to recover the dues or dispose of the collateral available.",F.07,3
+F.07.02,Credit Collections,"Collection Management is the capability of the bank to recover the past due loans and delinquent loans / loans under default. The bank initiates various measures to recover the loan including disposal of assets / collateral, suit filing etc.",F.07,3
+F.07.03,Credit  Recovery,The Recovery Management is the capability of the bank to initiate steps to recover monies due from delinquent loans through legal action or sale of collateral. The bank decides to initiate recovery measures if it is unlikely that loan would become a performing asset again or if the borrower is a willful defaulter.,F.07,3
+F.08,Advisory Services,,F,2
+F.08.01,Global Trade Advice,"Capability of the bank to provide advisory services to its clients on commercial processes relating to imports / exports, managing the risks involved based on country risk assessment, counter party risk assessment, transaction risk assessment etc. The bank uses its trade transactions knowledge, based on dealing with a wide variety of clients and its correspondent banking network, for getting information from foreign counterparties to advise its clients on how to structure the import / export transactions.",F.08,3
+F.08.02,Trust Advice,"The capability of bank to assist a client in setting up the Trust. The bank assists in structuring the Trust Deed, planning the inheritance taxes, complying with the necessary legal requirements etc.",F.08,3
+F.08.03,Tax Advice,"The capability of bank to 
+   - Maintain the information on tax regulations, 
+   - Interpret and apply the regulations, 
+   - Develop tax strategies
+   - Plan investment as per the tax strategies.",F.08,3
+F.08.04,Estate Advice,Estate Management is the capability of the bank to provide estate related services for Private Trust clients and Institutional Trust clients. These services include Estate Planning services and Estate Execution services.,F.08,3
+F.08.05,Merger & Acquisition Advice,"This capability enables the bank to provide advisory services to the clients for mergers and acquisitions. The capability includes: 
+   - Providing market research/ analysis and industry expertise for supporting the M&A activities 
+   - Providing the Strategy Development and Restructuring services 
+   - Valuating businesses for M&A 
+   - Advising and assisting the clients in evaluating and selecting the offers 
+   - Performing Due Diligence and Contract Management Services",F.08,3
+F.08.06,Capital Structuring Advice,"It is the capability of the bank to advise the clients on overall capital structure, the desired mix of short, medium and long-term financing to provide capital efficiency and flexibility. The capability also covers advising the client on the financing structure, tenure, timing and other important aspects of capital originations before bringing them to market.",F.08,3
+F.08.07,Financial Planning,"This capability enables the bank to provide advisory services to the clients by drawing up an investment plan to meet their short term and long term financial objectives like Asset Purchase, Retirement Planning , Education Savings planning etc. The capability includes: 
+   - Analyzing the financial needs/ objectives of the client 
+   - Assessing of the client's current financial position 
+   - Understanding the client's risk appetite 
+   - Identifying the gaps in meeting the desired financial objectives matching the client's current financial position and drawing up an investment plan to address these gaps.",F.08,3
+F.09,Transaction Management,,F,2
+F.09.01,Order & Trade Management,The ability of the Bank to manage orders for and trading in financial securities.,F.09,3
+F.09.01.01,Order Management,"Capture customer orders for sales and trading, create orders. Route orders. Settle orders, allocate orders.",F.09.01,4
+F.09.01.02,Pre-Trade Analysis,"The capability of the bank to provide tools to assist in determining how a particular trade can be executed to fetch the best execution for the client, for example market venue aggregation. ",F.09.01,4
+F.09.01.03,Trades Management,"Trade Management is the capability of the bank to perform trade confirmations, allocate trades to different portfolio accounts or customer accounts and enrich trades with settlement and other details before initiating the settlement.",F.09.01,4
+F.09.01.04,Securities Lending / Borrowing,This is the capability of the bank to manage the securities lending / borrowing contracts with lenders and borrowers and to record the security loan details.,F.09.01,4
+F.09.01.05,Security Inventory Position Reconciliation,"This is the capability to match the inventory of securities and derivatives positions as per the bank?s books and records with the records of counterparties, custodians and depositories.",F.09.01,4
+F.09.01.06,Position Keeping,Provide and manage current and historical view into security positions and portfolio balances of clients.,F.09.01,4
+F.09.01.07,Limit Verification,Manage the process to maintain and verify credit limits in an integrated fashion across client product portfolio.,F.09.01,4
+F.09.02,Clearing & Settlement,The ability of the Bank to participate in payment networks (electronic or otherwise) to facilitate the routing of payments and settlement against other participants.,F.09,3
+F.09.02.01,Securities Clearing,The capability of the bank to process clearing of trades and determining the net obligations to be settled with the clearing house or counterparty.,F.09.02,4
+F.09.02.02,Securities Settlement,The capability of the bank to settle trades with the clearing house or counterparty.,F.09.02,4
+F.09.02.03,Payments Clearing,The capability of the bank to manage clearing of payment transaction ,F.09.02,4
+F.09.02.04,Payments Settlement ,"The capability of the bank to carry out settlement of payment transaction with the counterparty bank (payee?s bank, in case of incoming payment order, and beneficiary?s bank, in case of an outgoing payment order) by settling the funds through Nostro account.",F.09.02,4
+F.09.03,Payments,This is the bank's capability to originate and authorize and maintain information about payments.  This includes transfer of funds between accounts of the same customer.,F.09,3
+F.09.03.01,Payment Origination,The ability to capture payment instructions,F.09.03,4
+F.09.03.02,Payment Authorization,The ability to authorize the execution of a payment above and beyond simply ensuring that the client is authorized to issue the instructions,F.09.03,4
+F.09.04,Transactions Reconciliation,Capability of the bank to reconcile the accounting values of a transaction and ensure that transaction is correctly booked in books and records. This is required to ensure that the bookings are carried out correctly to various accounts and the books are balanced.,F.09,3
+F.09.05,Basic Transaction Processing,"This is the capability to perform daily operations on client account like deposits, withdrawals, etc.",F.09,3
+F.09.06,Billing,"This is the bank's capability to generate bill as per the client's billing profile and billing frequency. Bill generation will take its input from product pricing, pricing determined during sales, account transaction history and ?loyalty' profile of the client.",F.09,3
+F.09.07,Claims Management,"This is the capability of providing benefits to a claimant under the terms of insurance contract. The insurance division needs to assess the loss and pay the claimant as per the policy?s terms and conditions. The factors and procedures for handling claims for different LOBs of insurance are different. For example, there is no claim recovery (salvage or subrogation) while processing a life claim.",F.09,3
+F.09.07.01,Claims Evaluation,This is the capability to monitor the handling of individual claims to assure adherence to rules and guidelines and identify opportunities for increasing claims handling skills. This includes the capability to conduct claim leakage reviews.,F.09.07,4
+F.09.07.02,Claims Settlement,"This is the capability of obtaining acceptance from the claimant on claim settlement amount, administering the payment to the claimant, completing all the documentation and correspondences and closing the claims file.",F.09.07,4
+F.09.07.03,Claims Investigation,Manage activities associated with claims investigation.,F.09.07,4
+F.09.07.04,Claims Recovery,This is the ability to obtain funds that offset the cost of benefits provided for a claim from the external parties that may have shared liability for the loss or that may purchase assets that become the property of the insurer as a result of the claim settlement.,F.09.07,4
+F.09.08,Escrow Management,Capability of the bank to act as an independent third party for fund collection and disbursement to appropriate parties. ,F.09,3
+F.09.09,Deposit Collections,Manage activities associated with collections across different deposit offerings,F.09,3
+F.09.10,Deposit Disbursement,Manage deposits disbursement process to different parties,F.09,3
+E,Enterprise Governance & Management,,TD,1
+E.01,Business Strategy & Performance Management,,E,2
+E.01.01,Vision & Mission Development,Vision Development is the capability of the bank to define its long term objectives and strategic positioning in the market. The Mission Statement of the bank defines the medium term goals that are aligned to achieve the long term objectives.,E.01,3
+E.01.02,Business Policy Development,The capability of the bank to develop the operational policies as a guideline to the operating units and employees for conducting the business.,E.01,3
+E.01.03,Environmental Sustainability Management,This is the capability to manage and monitor the programs executed by the bank that support environmental sustenance. It involves building awareness amongst the bank?s employees and partners.,E.01,3
+E.01.04,Business & Change Strategy,"This is the capability of defining and detailing the business strategies for achieving the medium and long term business objectives and define high level goals, to enable an overall approach to adapt the organization to business growth and future state.",E.01,3
+E.01.05,Business Plan Development,This is the bank?s capability to create a business plan in terms of business goals to be achieved and to time the plan for achieving these business goals. Business Plan can be created at multiple operating unit levels and aggregated at the enterprise level. ,E.01,3
+E.01.05.01,Demand Management,This is the ability to track the damand for internal resources such as people and money.,E.01.05,4
+E.01.05.02,Supply Management,The ability to track and manage the supply of resources such as people and money.,E.01.05,4
+E.01.06,Strategic Initiatives Management,"Capability of the bank to identify and implement the strategic plans like new business development, organizational restructuring, executing planned change, training the personnel, conducting stakeholder alignment, succession planning etc., that need to be initiated to meet its medium and long term objectives.",E.01,3
+E.01.07,Business Performance Measurement,"Performance Measurement is the capability of the bank to measure the actual performance of the organization or the operating units and compare it with the budgeted performance, to monitor the operational efficiency, and  measuring change effectiveness.",E.01,3
+E.01.08,Business & Strategic Architecture,"This includes establishing a common framework consisting of business, information, data, application and technology architecture layers for effectively and efficiently realising enterprise and IT strategies by creating key models and practices that describe the baseline and target architectures, define requirements for taxonomy, standards and guidelines.",E.01,3
+E.01.09,Organization Profitability Analysis,"Perform profitability analysis around product from various perspectives such as demographics, market segment, client segment or channels",E.01,3
+E.01.10,Business Policy Management,The ability to develop and manage appropriate business policies for the operation of the organization.,E.01,3
+E.01.11,Business Rules Management,The ability to develop and manage the detailed business rules,E.01,3
+E.02,Business Intelligence & Reporting,,E,2
+E.02.01,Analytics ,"Capability to provide and manage business intelligence and aggregates all analytic exercise that bank performs at any level of the organization such as marketing analytics, sales analytics, service analytics, interactive channel analytics, product analytics, risk analytics, client relationship analytics, client attrition analytics, client behavioral analytics, pricing analytics, transaction analytics, actuarial analytics, buy / hold analysis, etc.",E.02,3
+E.02.01.01,Unstructured Data Analytics,"The capability of the bank to mine information contained in unstructured data such as documents, text files, emails.",E.02.01,4
+E.02.01.02,Forecasting,The capability of the bank to analyze and predict future outcomes based on patterns in historical data ,E.02.01,4
+E.02.01.03,Modeling,"The capability of the bank to create, manage and deploy analytical models for all products and business lines, as well as performing predictive and simulation modelling.",E.02.01,4
+E.02.01.04,Collaborative Decision Support,"Provide services to share content, predictive models and analytical data to facilitate collaborative decisioning",E.02.01,4
+E.02.01.05,Operations Research,"The capability of the bank to leverage optimization, project scheduling and simulation techniques to identify actions that will improve business operations.",E.02.01,4
+E.02.02,Operational Reporting,The capability of the bank to generate reports necessary to support the day-to-day operations of the organization in a format and structure targeted for specific audiences.,E.02,3
+E.02.03,Research,The ability to perofrm industry research,E.02,3
+E.03,Risk Management,,E,2
+E.03.01,Risk Identification & Assessment,"Manage the process to identify and assess  risks. The capability of the bank to identify and quantify the risk relating to its business. Broadly there are three distinct categories of risks the bank has to deal with. These are the risks relating to: 
+   - Bank?s exposure to its counterparties on account of loans given, investments made, transactions not being settled etc. 
+   - Behavior of market variables like interest rates and exchange rates on its assets
+   - Failure / non-compliance of internal controls relating to people, policies and processes",E.03,3
+E.03.02,Risk Evaluation & Prioritization,"The capability of the bank to define parameters for risk probability and impact, and prioritize based on the risk score.",E.03,3
+E.03.03,Risk Clustering,Provide capability to group or pool risk assessment into different clusters such as products or client profiles or market segments,E.03,3
+E.03.04,Risk Mitigation Strategies & Controls,"The capability to define a formal approach to reduce risk, and to determine risk control methods across the business.  Covers ability of the bank to implement and execute a set of systems and processes to monitor the risk from its business activities on a continuous basis and effectively control its risks to minimize the unexpected losses. This includes comprehensive reporting, putting in place effective exposure control measures such as limits, taking cognizance of any changes in the market variables which affects the value of its investments or collaterals, testing of its risk identification and measurement processes on a continuous basis and providing for extreme scenarios.",E.03,3
+E.03.05,Credit Risk Management,Provide capability to monitor and mitigate credit risk,E.03,3
+E.03.06,Market Risk Management,Provide capability to monitor and mitigate market risk,E.03,3
+E.03.07,Operational Risk Management,Provide capability to monitor and mitigate operational risk. This also includes Business Continuity Planning and Disaster Recovery. ,E.03,3
+E.03.08,Risk Scorecards Management,Manage the process to rank risk ratings (scores),E.03,3
+E.04,Anti-Money Laundering (AML),,E,2
+E.04.01,AML Prevention,The capability of the bank  to prevent money laundering by means such as client segmentation and risk based scenarios definition and management.,E.04,3
+E.04.02,AML Detection,"The capability of the bank to detect a successful or attempt at money laundering thanks to watch list screening and real time money transfers, and transaction monitoring by means such as CTR/LCTR/EFT monitoring, Automated Transaction Monitoring, Aggregation and Exemption/Waiver management, etc. ",E.04,3
+E.04.03,AML Investigation,The capability of the bank to investigate money laundering event and determine corrective or preventive action.,E.04,3
+E.04.04,AML Analysis & Governance,"AML Analytics includes 'On-going Scenario Analysis and Tuning', Management/Operational Reporting, BSA/AML Risk Assessment. AML Governance includes Quality Assurance across AML Lifecycle, Data Governance, Policies and Procedures, Compliance. ",E.04,3
+E.04.04.01,Watch List Screening Management,Capability to manage lists related to Client/Vendor Screening ,E.04.04,4
+E.04.04.02,Regulatory Filing,"Regulatory Filing includes Electronic Filing, Automated Quality Controls.",E.04.04,4
+E.05,Fraud Management,,E,2
+E.05.01,Fraud Prevention,This capability allows the bank to take steps to prevent crime from occurring,E.05,3
+E.05.02,Fraud Detection,This is the capability to detect a potential or successful or attempt at fraud,E.05,3
+E.05.03,Fraud Investigation,"This is the capability of the bank to investigate a fraud event, assess the loss and determine the corrective and preventive action.",E.05,3
+E.05.04,Fraud Loss Recovery,This capability addresses the bank's ability to recover funds after a crime event,E.05,3
+E.06,"Finance, Tax & Accounting",,E,2
+E.06.01,"Planning, Forecasting & Budgeting","This is the bank?s capability to create a business plan in terms of business goals to be achieved and to time the plan for achieving these business goals. Business Plan is created at multiple operating unit levels and aggregated at the enterprise level.
+Forecasting is the capability of the bank to identify the likely trends that will have an impact on its operations. These forecasts are based on internal research and are used to create the business plans.
+Capability of the bank to budget its business volumes for the future. Bank typically budget the business volumes, to be achieved in a financial year, with interim budgets for different operating periods, to monitor the progress in achieving the budgeted goals.",E.06,3
+E.06.02,General Accounting / Process Transactions,"This capability includes the recording of financial events and documenting and managing the classification of transactional elements which allow for accurate identification, aggregation and reporting of financial transactions. This also includes the reporting of all the business accounts and their balances in the form of trial balances. Common business accounts include, but not limited to, maintaining chart of accounts, journalizing transaction details, reconciling general ledger accounts, preparing trial balances etc.",E.06,3
+E.06.03,Tax Management,"The capability of the bank to manage its tax compliance by establishing tax strategies and having effective tax management functions enabling tax planning, accounting and audits.",E.06,3
+E.06.04,Transfer & Reconciliation with General Ledger,"This capability includes the reconciliation of debit and credit balances of the posted documents, with debit and credit balances of the transactions figures in the accounts payable, accounts receivable and general ledger, to check the accuracy of data in the system and subsequently complete various closing activities example, foreign currency valuation of assets, prepaid expenses and unearned revenue adjustments, analysis of the purchase orders in process and clearing of accounts.",E.06,3
+E.06.05,Securitization,"This is  a capability of pooling various types of contractual debt such as residential mortgages, commercial mortgages, auto loans or credit card debt obligations and selling derived products to investors.",E.06,3
+E.06.06,Financial Reporting & Analysis,"This capability includes preparation and review of business unit financial statements, consolidated financial statements, cost management reports, quarterly/annual filings, shareholder reports, regulatory reports and performing legal and management consolidation. Financial reporting has following two aspects: 
+   - Internally, it allows management to track their financial position and make educated decisions. 
+   - Externally, it allows stockholders, bond holders, other possible investors etc., to track the company's performance and make educated investment decisions.",E.06,3
+E.07,Treasury Management,,E,2
+E.07.01,Dealing Desk Management,This is the capability of the bank to set up and manage the dealing desks for doing proprietary treasury deals. The bank organizes the dealing functions in terms of asset classes traded and defines the risk management controls in terms of trading limits.,E.07,3
+E.07.02,Internal Funding Management,The ability to monitor the bank's own accounts and ensure that business units have funds available to meet their operational needs,E.07,3
+E.07.03,Liquidity Management,"The capability of the bank to manage the liquidity requirements, the balance between its assets (loans) and liabilities (deposits) , interest rate mismatches etc. The bank also ensures that: 
+   - There are no idle funds 
+   - Reserve requirements are complied with 
+   - Foreign currency requirements for its trade finance operations are provided 
+   - Cash requirements at its branch / ATMs are met",E.07,3
+E.07.04,Credit Rating Management,"The capability of the bank to manage appropriate cash position, capital balance, reserves, risks and to work with agencies and organizations to maintain and improve the bank?s credit rating.",E.07,3
+E.07.05,Capital Structure Management,It is the capability of the bank to facilitate the credit rating for different types of debt originations for various corporate and government entities as well as for any issuance of the bank.. The capability includes having consultations with different rating agencies and providing the relevant data and information on behalf of the Issuer for getting the desired ratings.,E.07,3
+E.08,Compliance,,E,2
+E.08.01,Compliance Governance & Oversight,"This capability includes: 
+- Global Compliance Manual
+- Keeping current on Canadian , US & International rules, regulations and regulatory environment
+- Mapping applicable regulations to TD policies & procedures
+- Translating rules & regulations into scenarios & parameters
+- Compliance advisory",E.08,3
+E.08.01.01,Compliance Requirements Management,Capability of the bank to identify compliance requirements. The compliance requirements are of two types: internal and regulatory. ,E.08.01,4
+E.08.01.02,Compliance Controls Implementation,Capability of the bank to put in place the processes and procedures to ensure that the compliance controls are implemented,E.08.01,4
+E.08.02,Compliance Surveillance & Monitoring,"Establish a watch over the application of internal/external compliance requirements, detecting and managing incidents of non-compliance",E.08,3
+E.08.03,Analysis & Investigation,The ability to analyse and investigate incidents of non-compliance,E.08,3
+E.08.04,Regulatory Reporting,The ability of the bank to comply with the requirements for timely submission of the mandated reports to the regulatory bodies with full disclosure. This includes execute regulatory filings and approvals. These include the approvals required for its operations and the approvals that the bank does on behalf of its customer.,E.08,3
+E.09,Legal,,E,2
+E.09.01,Legal Contract Design,"This is the capability of the bank to design legal contracts that need to be executed by the bank?s clients or counterparties. In the course of its business, bank needs to enter into the legal contracts with the clients for the products and services offered to them such as, loan products. The bank also needs to enter into legal contracts with other counterparties, like vendors etc. Therefore, the bank needs to ensure that the terms of the contract are in conformity with the legal requirements and take care of bank?s interests.",E.09,3
+E.09.02,Legal Proceedings Management,"The capability of the bank to manage the legal proceedings initiated by it or initiated against it in a court of law. When a dispute is referred for legal action by the bank or against the bank, the bank needs to ensure that all the requirements relating to the legal proceedings like presentation of its case, adherence to the requirements of the court etc., are met to ensure a favorable judgment.",E.09,3
+E.09.03,Legal Advice,"The capability of the bank to provide legal advice required by its lines of business or operating units. In the course of their business, lines of business or operating units require legal advice on various issues like dispute management with counterparties, product design, etc. The bank needs to ensure that the proper systems are in place so that the lines of business and operating units get the necessary legal advice within the required time.",E.09,3
+E.09.04,Intellectual Property Management,This is the bank?s capability to ensure that its intellectual property rights are protected through patents and legal action is initiated for any violation of these rights.,E.09,3
+E.10,Human Resources,,E,2
+E.10.01,HR Planning Policies & Strategies," This is the capability to develop and manage the H/R planning policies and strategies. The capability includes: 
+   - Identifying tactical and strategic H/R needs 
+   - Defining H/R business function roles and accountability 
+   - Defining/refining H/R policies (induction, compensation/benefits, promotion, separation etc.) 
+   - Determining H/R costs and establishing H/R measures 
+   - Communicating H/R strategies and plans and providing updates to the stakeholders 
+   - Measuring the realization of objectives
+This capability includes the set of processes pertaining to: 
+   - Selecting recruiting methods 
+   - Performing recruiting activities 
+   - Holding/ participating in recruiting events 
+   - Managing recruitment vendors",E.10,3
+E.10.02,"Employee Recruitment, Sourcing & Selection","This is the capability of creating and developing employee requisitions, recruiting and sourcing candidates, screening and selecting candidates, managing pre-placement verification, managing new hires/re-hires and tracking candidates.
+
+Talent Management and Diversity includes:
+   - Recruiting Services
+   - Campus Recruitment
+   - Executive Search
+   - Diversity Management and Planning
+   - On boarding process
+   - Executive Tracking
+   - Diversity Surveys",E.10,3
+E.10.03,Organization Design & Performance,"This capability includes:
+   - Development & Career Planning
+   - Performance Assessment
+   - Couching/ Counseling
+   - Position Management
+   - 360 Process
+   - Job Titling
+   - Reporting",E.10,3
+E.10.04,Employee Management,The ability of the bank to perform the tasks related to day to day managing of employees.,E.10,3
+E.10.04.01,Employment Information Management,The capability of the bank to perform lifecycle management of employee information,E.10.04,4
+E.10.04.02,Employee Role Management,The ability of the bank to assign employees to specific positions (e.g. job titles) and general roles and maintain information about those assignments,E.10.04,4
+E.10.04.03,Employee Time Management,The ability of the  bank to manage employee time at work and time away according to relevant policies and regulations.,E.10.04,4
+E.10.04.04,Employee Reward & Retention,"The capability includes:
+   - Developing and managing reward, recognition and motivation programs 
+   - Managing employee assistance and retention 
+   - Managing and administering employee benefits",E.10.04,4
+E.10.05,Payroll Processing,"This capability includes the calculation of salaries, commissions, bonuses and deductible amounts as per the stated payroll policies and procedures.",E.10,3
+E.10.06,Health & Safety,Manage the process of advising and monitoring employees around health and safety,E.10,3
+E.10.07,Learning & Development,"This capability includes: 
+   - Design, Develop & Deliver learning solutions
+   - Class-room based, eLearning ,Webinars & print materials
+   - Executive Training activities
+   - Governance of external L&D vendors
+   - Provide L&D application support
+   - Course Evaluation
+   - Continuing Educations
+   - L&D Reporting",E.10,3
+E.11,Process & Change Management,,E,2
+E.11.01,Program & Project Management,The ability to manage programs and projects in a structured manner,E.11,3
+E.11.02,Process Management,"The ability to model, design, implement, measure, control, report on and improve processes.",E.11,3
+E.11.02.01,Process Governance,The ability to develop and execute a governance program for processes.  Includes maintaining framework and catalog of all processes.,E.11.02,4
+E.11.02.02,Process Quality & Optimization,"The ability to ensure process quality against process policies and procedures, objectives, goals and expected result, as well as the ability to streamline, lean and optimize process execution.",E.11.02,4
+E.11.03,Change Management,The capability of the bank to manage change events on the organization. ,E.11,3
+E.11.03.01,Define Change Management Strategy ,"The capability of the bank to define an overall approach to change in the organization. This includes high level goals and objectives for change, conducting stakeholder alignment, accomplish change impact assessment, executing the change, training the personnel and measuring change effectiveness ",E.11.03,4
+E.11.03.02,Change Impact Assessment,"The capability of the bank to identify and address impacts to the business due to planned change(s). It includes evaluation of risks (including impact on resources, effort and schedule) and any impact to existing processes, procedures, or operating  models.",E.11.03,4
+E.11.03.03,Change Planning,"The capability of the bank to plan and manage the change from the current state to the proposed target state.  Change can be managed at the enterprise, line-of-business, or more granular levels.",E.11.03,4
+E.11.03.04,Training Plan Management,The capability of the bank to ensure relevant skills are planned to be delivered so that employees can operate effectively and efficiently in the proposed environment.  This capability includes design and development of role-based training and performance.,E.11.03,4
+E.11.03.05,Change Readiness Assessment,"The capability of the bank to facilitate and measure change readiness to ensure that stakeholder groups are prepared not only for a successful transition, but also to sustain the change.",E.11.03,4
+E.11.03.06,Change Execution Monitoring,"The capability of the bank to ensure that change execution is implemented as planned. This capability also includes monitoring any deviations from plan, and executes corrective action where necessary. ",E.11.03,4
+E.11.04,Case Management,The ability to manage long running work flow performed in a structured or partly-structured way.,E.11,3
+E.12,Information Technology,,E,2
+E.12.01,IT Strategy,This is the capability of the bank to articulate the goals and vision for IT and ensure the alignment of IT and business strategy. This also includes Technology Architecture and  Innovation.,E.12,3
+E.12.01.01,Enterprise Architecture Management,"The capability of the bank to capture, maintain and evolve the enterprise wide architecture of the bank and also lay down the standards and guidelines including taxonomy, procedures, templates and tools for all infrastructure and technology developments of the bank. This includes alignment with business strategy, increased agility, improved quality of information and ability to generate potential cost savings through initiatives such as re-use of building block components",E.12.01,4
+E.12.01.02,Technology Innovation,"The capability of the bank to maintain an awareness of information technology and related service trends, identify innovation opportunities, and plan how to benefit from innovation in relation to business needs. This includes analysis of what opportunities for business innovation or improvement can be created by emerging technologies, services or IT enabled business innovation, as well as through existing established technologies and by business and IT process innovation. Influence strategic planning and enterprise architecture decisions.",E.12.01,4
+E.12.02,IT Portfolio Management,The capability of the bank to manage and maintain portfolios of IT services and IT assets.,E.12,3
+E.12.02.01,Technology Assets and Services Management,"Manage and track logical IT assets (such as applications, services, processes, enterprise reference model) and their associated linkages. Manage and track technology product portfolio especially around currency and associated business impact.",E.12.02,4
+E.12.02.02,Data & Information Management,"Provide governance and oversight of  business information and data such as repositories housing the data and associated linkages to managing applications, consuming application, enterprise information reference models and associated sensitivity profiles.",E.12.02,4
+E.12.03,Business Process Integration,"Provide ability to integrate business processes internal to enterprise to enhance operational efficiency, to orchestrate business processes based on centralized rules and to integrate business processes external to enterprise with partners.",E.12,3
+E.12.04,Solution Development,"The capability of the bank to perform technology solution design, solution acquisition, solution management, software solution development/ SDLC.",E.12,3
+E.12.05,Service Level Management,"The capability of the bank to perform SLA Management, quality assurance, manage IT services/ITIL, manage user support services, client communication.",E.12,3
+E.12.05.01,"Service Requests, Change & Incidents Management","Ability to insure timely and effective response to user requests and resolution of all types of incidents. Restore normal service; record and fulfil user requests; and record, investigate, diagnose, escalate and resolve incidents.",E.12.05,4
+E.12.05.02,Problem Management,Identify and classify problems and their root causes and provide timely resolution to prevent recurring incidents. Provide recommendations for improvements.,E.12.05,4
+E.12.06,Technology Operations Management,"This is the capability of the bank to operate and manage the information technology infrastructure to ensure proper functioning of the bank. This includes Co-ordination and execution of the activities and operational procedures required to deliver internal and outsourced IT services, including the execution of pre-defined standard operating procedures and the required monitoring activities.",E.12,3
+E.12.06.01,Operations Management,"Provide ability to monitor, manage and schedule different activities associated with infrastructure operations such as backup, recovery, archiving,  uptime monitoring and performance.",E.12.06,4
+E.12.06.02,Security Management,Ability to protect enterprise information to maintain the level of information security risk acceptable to the enterprise in accordance with the security policy. Establish and maintain information security roles and access privileges and perform security monitoring.,E.12.06,4
+E.12.06.03,Configuration Management,"Define and maintain descriptions and relationships between key resources and capabilities required to deliver IT-enabled services, including collecting configuration information, establishing baselines, verifying and auditing configuration information, and updating the configuration repository. This includes managing and tracking information about infrastructure configuration such as versions, platforms, products, linkages to servers and cost charge backs.",E.12.06,4
+E.12.06.04,Availability & Capacity Planning,"This is the capability to balance current and future needs for availability, performance and capacity with cost-effective service provision. Include assessment of current capabilities, forecasting of future needs based on business requirements, analysis of business impacts, and assessment of risk to plan and implement actions to meet the identified requirements.",E.12.06,4
+E.12.06.05,Disaster Recovery Planning,Establish and maintain a plan to enable IT to respond to incidents and disruptions in order to continue operation of critical business processes and required IT services and maintain availability of information at a level acceptable to the enterprise.,E.12.06,4
+E.13,Real Estate & Facility Management,,E,2
+E.13.01,Property Acquisition Strategy,"Property Acquisition Strategy is important as real estate is a means to support institutional objectives and larger needs of the organization. The property acquisition strategy takes into account the business needs: contract events, leaner budgets, service shifts, financing, workforce reorganization and change. The property acquisition strategy involves understanding, planning and engagement of the available funds and business benefits payback, the required support from other areas of the business such as IT, H/R etc. and operational limitations. It also involves relocating people and operations and changing working habits and culture.",E.13,3
+E.13.02,Facility Management,"The capability includes a set of processes pertaining to coordination and overseeing the safe, secure and environmentally sound operations and maintenance of real estate assets in a cost effective manner aimed at long-term preservation of the asset value.",E.13,3
+E.13.02.01,Facility Design & Build,This is the capability to define requirement for physical infrastructure specific to the bank?s needs and manage the construction. ,E.13.02,4
+E.13.02.02,Facility Security,Provide services to secure physical /real estate properties.,E.13.02,4
+E.13.02.03,Facility Disposal,The property disposal process comprises two distinct stages. First is the development of the most appropriate disposal strategy and second relates to the implementation of the agreed strategy.,E.13.02,4
+E.14,Enterprise Information Management,,E,2
+E.14.01,Content Management,"The capability of the bank to support the collection, managing and publishing of information in any form or medium. ",E.14,3
+E.14.01.01,Digital Asset Management,"Provide ability to store, track and manage rich, digital assets for reuse across the enterprise",E.14.01,4
+E.14.01.02,Content Rules Management,Manage rules driven generation of enterprise content.,E.14.01,4
+E.14.01.03,Content Collaboration & Workflow Management,"Provide capability for collaborative, workflow based of enterprise content life cycle.",E.14.01,4
+E.14.02,Knowledge Management,"The capability of the bank to manage knowledge frameworks, create and share knowledge assets, support knowledge management services and applications. ",E.14,3
+E.14.02.01,Knowledge Management Framework,"The capability of the bank to provide an overall methodology to create, manage and measure the knowledge sharing and management across the bank. This capability also covers the usage of tools and methods to disseminate knowledge.",E.14.02,4
+E.14.02.02,Knowledge Asset Management ,The capability of the bank  to create and manage knowledge assets.,E.14.02,4
+E.14.02.03,Knowledge Sharing,The capability of the bank to share and apply banking information and / or expertise across the organization.,E.14.02,4
+E.14.03,Document Management,"The capability of the bank to manage the creation, usage, storage and destruction of physical or electronic documents and forms.  It includes originating documents from various sources, to scan and index documents and generate default metadata for digital usage, to manage the physical disposition of documents and the security associated with it, to define the process and technology benchmark for the mechanisms and policies of retrieving and releasing documents, to define the process and technology benchmark for versioning and controlling documents, to destroy all document-types including both physical and electronic documents. ",E.14,3
+E.14.04,Industry Information & Standards,"The capability of the bank to perform Information Requirements Identification, Business Information Sourcing, Business Information Maintenance and Business Information Distribution.",E.14,3
+E.14.04.01,Information Requirements Identification,"The capability of the bank to determine the industry standard information is required for its business. The bank requires a variety of information (such  as Securities Data, Currency Data, FX Rates, BIC Codes, Messaging Standards, etc.",E.14.04,4
+E.14.04.02,Business Information Sourcing,"The capability of the bank to source its business information requirement from the appropriate sources, and to ensure that clean data (data without errors) is obtained preferably from the primary source of the data at the best possible price.",E.14.04,4
+E.14.04.03,Business Information Maintenance,Capability of the bank to ensure that the business information it has sourced is refreshed at the correct periodicity and is maintained current.,E.14.04,4
+E.14.04.04,Business Information Distribution,"Capability of the bank to ensure that the business information is distributed to the business units that require them, maintaining the data integrity.",E.14.04,4
+E.14.05,Information Governance & Management,The ability of the organization to govern and manage information collected or created in the process of carrying out its business,E.14,3
+E.15,Partner & Stakeholder Relationship Management,,E,2
+E.15.01,Partner Selection & Contracting,This capability supports the activities required to select a suitable partner for a specific purpose and enter into a contract to execute the partnership.,E.15,3
+E.15.02,Procurement & Contract Management,"The capability of the bank to perform Contracts / Agreement Management, Purchase Order Management, Invoice Payment Management, Sourcing Performance Management, Procurement Strategy Management, Sourcing/Vendor Management.",E.15,3
+E.15.02.01,Inventory Order Management,"Based on an understanding of expected demand and strategies for inventory level, generate an manage life cycle of an order to the appropriate supplier.",E.15.02,4
+E.15.03,Partner Management,This is the capability of the bank to continuously monitor and assess the performance of the partnership and handle any variance or disputes.,E.15,3
+E.15.03.01,Partner Needs Analysis,This capability enables the bank to identify the need for a partner and defines the requirements for a partner to deliver the service to the bank.,E.15.03,4
+E.15.03.02,Partner Relationship Management,"This is the capability to monitor the partnership activities to ensure that the service levels are adhered to as per the contract,  and to assess the performance of the partnership on a periodic basis.",E.15.03,4
+E.15.04,Internal Communications ,"The capability of the bank to understand and establish communication requirements of the stakeholders, and provide timely and accurate reporting on services being provided and performance metrics.",E.15,3
+E.15.05,External Communications,Manage the process to communicate with external  stakeholders. Includes distribution of reports.,E.15,3

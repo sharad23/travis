@@ -1,0 +1,446 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/force.css">
+    <title>Xtravis</title>
+    <script type="text/javascript">
+                if (window.location.protocol == "https:") {
+                    var restOfUrl = window.location.href.substr(6);
+                    window.location.replace("http:" + restOfUrl);
+                }
+            </script>
+
+<style type="text/css">
+
+div.mydiv{
+    width:1200px;
+    height: 800px;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #eee;
+}
+div.mydiv2{
+
+width:1200px;
+    height: 200px;
+    float: left;
+    padding: 5px;
+    margin: 5px;
+    background-color: #fff;
+}
+
+
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+  font-family: Verdana, Geneva, sans-serif;
+  font-size: xx-small;
+}
+
+.link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.link:hover {
+  stroke-opacity: .5;
+}
+
+</style>
+
+
+</head>
+
+<body>
+
+<div role="navigation" class="navbar navbar-default navbar-static-top">
+    <div class="navbar-header col-sm-2 col-md-2">
+                <div class="logo-well">
+                    <a href="http://www.xtravis.com">
+                        <img src="img/logo_see.png" alt="What would you like to see?" id="logo">
+                    </a>
+                </div>
+
+            </div><div class="container">
+        <div class="row">
+            <div class="col-sm-7 col-md-7">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <form role="search" class="navbar-form" id="search">
+                            <div class="form-group">
+                                <input type="text" id="searchField" value="" placeholder="Search" class="form-control">
+                            <button id = "searchBtn" class="btn btn-default" type="button" >Search</button>
+
+
+                            <select id="labels"><option></option></select>
+                            <button id = "dminus" value="1" class="btn btn-default" type="button" >-</button>
+                            <button id = "dsubmit" class="btn btn-default" type="button" > </button>
+                            <button id = "dplus" value = "1" class="btn btn-default" type="button" >+</button>
+                            <button id = "direction" value = "reverse" class="btn btn-default" type="button" ><></button>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<p id="chart"></p>
+
+<script src= "lib/jquery.min.js"></script>
+<script src = "lib/d3.min.js"></script>
+<script src = "lib/sankey.js"></script>
+
+<script src="lib/neo4j-web.min.js"></script>
+
+<script>
+        var neo = neo4j.v1;
+        var driver = neo.driver("bolt://localhost", neo.auth.basic("neo4j", "db"));
+        var session = driver.session();
+        console.log(session);
+
+$(document).ready(function() {
+    var e = "forLater";
+    var _depth = 2,_search = "",_limit = 100, _label ="BRAM1";
+    var direction = "";
+
+    getLabels(e);
+
+   var query= {"statements":[{"statement":main_query(_label,_search,_depth,_limit), "resultDataContents":["graph"]}]};
+   console.log(query);
+   //ajaxCall(query,direction);
+
+
+   function main_query(_label,_search,_depth,_limit){
+     var mStatement;
+     if (_search == ""){
+       mStatement = "match (m:" + _label +"),(n),o=(m)-[*0.."+ _depth +"]-(n) return m.name,n.name,o limit "+ _limit ;
+     }
+     else{
+       mStatement = "match (m:" + _label +"),(n),o=(m)-[*0.."+ _depth +"]-(n) where m.name=~ '(?i).*" +_search + ".*' return m.name,n.name,o limit "+ _limit
+       }
+     return mStatement;
+   }
+
+   var query= {"statements":[{"statement":main_query(_label,_search,_depth,_limit), "resultDataContents":["graph"]}]};
+   console.log(query);
+   ajaxCall(query,direction);
+
+     $("#labels").change(function(){
+     var _depth = 2,_search = "",_limit = 80, _label ="Architect";
+     _label = $("#labels").val();
+     var query= {"statements":[{"statement":main_query(_label,_search,_depth,_limit), "resultDataContents":["graph"]}]};
+     console.log(_label);
+     console.log(query);
+     ajaxCall(query,direction);
+     console.log(_label);
+     });
+
+    $("#direction").click(function(){
+    //var _depth = 2,_search = "",_limit = 120, _label ="Architect";
+    if(direction==$("#direction").val()){direction="default";}else{direction = $("#direction").val()};
+      var query= {"statements":[{"statement":main_query(_label,_search,_depth,_limit), "resultDataContents":["graph"]}]};
+      ajaxCall(query,direction);
+   });
+
+
+
+   $("#dminus").click(function(){
+      if(_depth >=2){
+         $("#dminus").prop('disabled', false);
+           _depth = _depth - parseInt($("#dminus").val());
+           $("#dsubmit").text(_depth);
+           var query= {"statements":[{"statement":main_query(_label,_search,_depth,_limit), "resultDataContents":["graph"]}]};
+           ajaxCall(query);
+        }
+        else
+        {
+          $("#dsubmit").css('color','red');
+          $("#dminus").prop('disabled', true);
+        }
+      });
+
+      $("#dplus").click(function(){
+        if(_depth<=4){
+            $("#dplus").prop('disabled', false);
+            _depth = _depth + parseInt($("#dminus").val());
+            $("#dsubmit").text(_depth);
+                var query= {"statements":[{"statement":main_query(_label,_search,_depth,_limit), "resultDataContents":["graph"]}]};
+                ajaxCall(query);
+        }
+        else
+        {
+           $("#dplus").prop('disabled', true);
+           $("#dsubmit").css('color','red');
+        }
+
+      });
+
+       $("#searchBtn").click(function(){
+        _search = $("#searchField").val();
+        var query= {"statements":[{"statement":main_query(_label,_search,_depth,_limit), "resultDataContents":["graph"]}]};
+        ajaxCall(query,direction);
+   });
+
+});
+
+function getLabels(e)
+{
+
+var descrip;
+var statement = "CYPHER runtime=compiled Call db.labels";
+    session.run(statement)
+    .then (function(result) {
+         var records = [];
+         for (i = 0; i < result.records.length; i++) {
+            records.push(result.records[i]);
+            }
+         return records;
+        })
+       .then(function(records){
+         //console.log (records);
+           for(i = 0; i < records.length; i ++)
+                {
+                   descrip=records[i].get("label");
+                   $('#labels').append('<option value=' + descrip + '>' + descrip + '</option>');
+                  // console.log(descrip);
+                }
+      });
+
+}
+
+
+
+
+</script>
+
+
+
+<script>
+
+
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+// jQuery ajax call
+//var color = d3.scale.category20();
+
+//var nodes= [], links=[];
+
+function ajaxCall(query,direction)
+{
+
+var graph;
+var _search = "acqui";
+
+var nodes= [], links=[];
+var request = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+
+        // parsing the output of neo4j rest api
+            data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+
+                if (idIndex(nodes,n.id) == null){
+                  if(n.labels[0]=="Person"){
+                    nodes.push({id:parseInt(n.id),label:n.labels[0],name:n.properties.role + ":" +n.properties.name});
+                  }
+                  else{
+                    nodes.push({id:parseInt(n.id),label:n.labels[0],name:n.properties.name});
+                  }
+                }
+            });
+            links = links.concat( row.graph.relationships.map(function(r) {
+              //return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode), value:Math.floor(Math.random() * (20 + 1)) + 5};
+              return {source:r.startNode,target:r.endNode, value:Math.floor(Math.random() * (20 + 1)) + 5};
+
+            }));
+        });
+        graph = {nodes:nodes, links:links};
+        drawGraph(graph,direction);
+}
+
+});
+}
+
+// load the data
+function drawGraph(graph,direction) {
+var _search = "acqui";
+var units = "Capabilities";
+
+var margin = {top: 10, right: 10, bottom: 10, left: 10},
+    width = 1400 - margin.left - margin.right,         //1200
+    height = 900 - margin.top - margin.bottom;         //740
+
+var formatNumber = d3.format(",.0f"),    // zero decimal places
+    format = function(d) {
+    return formatNumber(d) + " " + units; },
+    color = d3.scale.category20();
+
+// append the svg canvas to the page
+
+try{
+   path="";
+   sankey
+      .nodes()
+      .links()
+      .layout(32);
+}
+catch(err){
+
+}
+d3.select("#the_SVG_ID").remove();
+
+
+var svg = d3.select("#chart").append("svg")
+    .attr("id","the_SVG_ID")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform",
+          "translate(" + margin.left + "," + margin.top + ")")
+          ;
+
+// Set the sankey diagram properties
+var sankey = d3.sankey()
+    .nodeWidth(36)
+    .nodePadding(10)
+    .size([width, height]);
+
+var path = sankey.link();
+
+    var nodeMap = {};
+    graph.nodes.forEach(function(x) { nodeMap[x.id] = x; });
+
+     graph.links = graph.links.map(function(x) {
+       if(direction=="reverse"){
+          return {
+        target: nodeMap[x.source],
+        source: nodeMap[x.target],
+        value: x.value
+      };
+
+       }
+       else{
+          return {
+        source: nodeMap[x.source],
+        target: nodeMap[x.target],
+        value: x.value
+      };
+       }
+
+    });
+  ;
+  sankey
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .layout(32);
+
+// add in the links
+function zoomFunction(){
+  d3.selectAll("path")
+  .attr("transform",
+  "translate(" + d3.event.translate+") scale ("+d3.event.scale +")");
+}
+
+  var link = svg.append("g").selectAll(".link")
+      .data(graph.links)
+    .enter().append("path")
+      .attr("class", "link")
+      .attr("d", path)
+      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+      .sort(function(a, b) { return b.dy - a.dy; });
+
+// add the link titles
+  link.append("title")
+        .text(function(d) {
+         // console.log(d);
+      	return d.source.ID + " → " +
+                d.target.ID + "\n" + format(d.value); });
+
+// add in the nodes
+  var node = svg.append("g").selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      .attr("transform", function(d) {
+		  return "translate(" + d.x + "," + d.y + ")"; })
+    .call(d3.behavior.drag()
+      .origin(function(d) { return d; })
+      .on("dragstart", function() {
+		  this.parentNode.appendChild(this); })
+      .on("drag", dragmove));
+
+// add the rectangles for the nodes
+  node.append("rect")
+      .attr("height", function(d) { return d.dy; })
+      .attr("width", sankey.nodeWidth())
+      .style("fill", function(d) {
+		  return d.color = color(d.name.replace(/ .*/, "")); })
+      .style("stroke", function(d) {
+		  return d3.rgb(d.color).darker(2); })
+    .append("title")
+      .text(function(d) {
+		  return d.name + "\n" + format(d.value); });
+
+// add in the title for the nodes
+  node.append("text")
+      .attr("x", -6)
+      .attr("y", function(d) { return d.dy / 2; })
+      .attr("dy", ".35em")
+      .attr("text-anchor", "end")
+      .attr("transform", null)
+      .text(function(d) { return d.name; })
+    .filter(function(d) { return d.x < width / 2; })
+      .attr("x", 6 + sankey.nodeWidth())
+      .attr("text-anchor", "start");
+
+// the function for moving the nodes
+  function dragmove(d) {
+    d3.select(this).attr("transform",
+        "translate(" + (
+        	   d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+        	) + "," + (
+                   d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+            ) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+  }
+
+  var zoom =d3.behavior.zoom()
+  .scaleExtent([0.2,10])
+  .on("zoom",zoomFunction);
+
+
+};
+
+</script>
+
+</script>
+
+</body>
+</html>

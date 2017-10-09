@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+  <title>Untitled</title>
+<style>
+
+.node {
+  cursor: pointer;
+}
+
+.node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.node text {
+  font: 10px sans-serif;
+}
+
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+</style>
+
+
+</head>
+
+<body>
+<script src = "/d3/d3.min.js"></script>
+<script src= "/jquery/jquery.min.js"></script>
+<script src="/neo4j-driver/lib/browser/neo4j-web.min.js"></script>
+<script>
+
+//var query= {"statements":[{"statement":"MATCH p=(n)-->(m)<--(k),(n)--(k) RETURN p Limit 100", "resultDataContents":["graph","row"]}]};
+var query= {"statements":[{"statement":"MATCH (m),(n),o=(m)-[*0..2]->(n) return m,n,o", "resultDataContents":["graph"]}]};
+
+//the helper function provided by neo4j documents
+function idIndex(a,id) {
+    for (var i=0;i<a.length;i++) {
+        if (a[i].id == id) return i;}
+    return null;
+}
+// jQuery ajax call
+
+var nodes=[], links=[];
+
+
+var width = 800, height = 800;
+  // force layout setup
+var force = d3.layout.force()
+          .charge(-200).linkDistance(30).size([width, height]);
+  // setup svg div
+var svg = d3.select("#graph").append("svg")
+          .attr("width", "100%").attr("height", "100%")
+          .attr("pointer-events", "all");
+var graph;
+
+var request = $.ajax({
+    type: "POST",
+    url: "http://localhost:7474/db/data/transaction/commit",
+    accepts: { json: "application/json" },
+    dataType: "json",
+    contentType:"application/json",
+    data: JSON.stringify(query),
+    //now pass a callback to success to do something with the data
+    success: function (data) {
+        // parsing the output of neo4j rest api
+        console.log (data);
+        data.results[0].data.forEach(function (row) {
+            row.graph.nodes.forEach(function (n) {
+                if (idIndex(nodes,n.id) == null){
+                    nodes.push({id:n.id,label:n.labels[0],title:n.properties.Capability});
+                }
+            });
+            links = links.concat( row.graph.relationships.map(function(r) {
+                // the neo4j documents has an error : replace start with source and end with target
+                return {source:idIndex(nodes,r.startNode),target:idIndex(nodes,r.endNode),type:r.type};
+            }));
+        });
+        graph = {nodes:nodes, links:links};
+        console.log(graph);
+
+  d3.json(graph, function(error, graph) {
+    if (error) return;
+      force.nodes(graph.nodes).links(graph.links).start();
+      // render relationships as lines
+      var link = svg.selectAll(".link")
+              .data(graph.links).enter()
+              .append("line").attr("class", "link");
+      // render nodes as circles, css-class from label
+      var node = svg.selectAll(".node")
+              .data(graph.nodes).enter()
+              .append("circle")
+              .attr("class", function (d) { return "node "+d.label })
+              .attr("r", 10)
+              .call(force.drag);
+      // html title attribute for title node-attribute
+      node.append("title")
+              .text(function (d) { return d.title; })
+      // force feed algo ticks for coordinate computation
+      force.on("tick", function() {
+          link.attr("x1", function(d) { return d.source.x; })
+                  .attr("y1", function(d) { return d.source.y; })
+                  .attr("x2", function(d) { return d.target.x; })
+                  .attr("y2", function(d) { return d.target.y; });
+          node.attr("cx", function(d) { return d.x; })
+                  .attr("cy", function(d) { return d.y; });
+      });
+  });
+
+}
+ })
+
+</script>
+
+</body>
+
+</html>
